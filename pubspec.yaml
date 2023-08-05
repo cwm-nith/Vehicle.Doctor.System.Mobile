@@ -35,6 +35,61 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
+  #GetX
+  get: ^4.6.5
+
+  # date
+  intl: ^0.18.1
+
+  # device ui resizing
+  flutter_screenutil: ^5.8.4
+
+  pull_to_refresh: ^2.0.0
+
+  fluttertoast: ^8.2.2
+
+  flutter_easyloading: ^3.0.5
+
+  # http
+  dio: ^5.3.2
+  dio_cookie_manager: ^3.1.0+1
+  cookie_jar: ^4.0.8
+
+  # local storage
+  shared_preferences: ^2.2.0
+  cached_network_image: ^3.2.3
+  flutter_cache_manager: ^3.3.1
+
+  image_picker: ^1.0.2
+
+  photo_view: ^0.14.0
+
+  flutter_local_notifications: ^15.1.0+1
+
+  location: ^5.0.2+1
+
+  permission_handler: ^10.4.3
+  path_provider: ^2.0.15
+
+  # loading
+  loading_animations: ^2.2.0
+
+  # share
+  share_plus: ^7.1.0
+
+  # device info
+  device_info_plus: ^9.0.3
+
+  # package info
+  package_info_plus: ^4.1.0
+
+  dots_indicator: ^3.0.0
+
+  firebase_messaging: ^14.6.5
+  firebase_in_app_messaging: ^0.7.3+4
+
+  crypto: ^3.0.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
