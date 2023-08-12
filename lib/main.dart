@@ -1,12 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:vehicle_doctor_mobile/common/routes/names.dart';
 import 'package:vehicle_doctor_mobile/common/routes/pages.dart';
+import 'package:vehicle_doctor_mobile/common/services/services.dart';
+import 'package:vehicle_doctor_mobile/common/store/store.dart';
 
-void main() {
+Future<void> main() async {
+  await init();
+  // Setting.init(() {
   runApp(const MyApp());
+  // });
+}
+
+Future init() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  Get.put(StorageService());
+  await StorageService.to.init();
+  Get.put(UserStore());
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
 }
 
 class MyApp extends StatelessWidget {
@@ -21,7 +38,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: "Vehicle Doctor",
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.blueGrey,
         ),
         initialRoute: AppRoutes.initial,
         getPages: AppPages.routes,

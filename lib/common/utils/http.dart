@@ -1,16 +1,14 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
-import 'package:dio/io.dart';
-import 'package:dio_cookie_manager/dio_cookie_manager.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart' hide FormData;
+import 'package:vehicle_doctor_mobile/common/entities/entities.dart';
 import 'package:vehicle_doctor_mobile/common/store/user.dart';
 import 'package:vehicle_doctor_mobile/common/utils/loading.dart';
 import 'package:vehicle_doctor_mobile/common/utils/print.dart';
 import 'package:vehicle_doctor_mobile/common/values/cache.dart';
 import 'package:vehicle_doctor_mobile/common/values/server.dart';
+import 'package:vehicle_doctor_mobile/common/widgets/widgets.dart';
 
 class HttpUtil {
   static final HttpUtil _instance = HttpUtil._internal();
@@ -24,24 +22,26 @@ class HttpUtil {
       baseUrl: serverApiUrl,
 
       // baseUrl: storage.read(key: STORAGE_KEY_APIURL) ?? SERVICE_API_BASEURL,
-      connectTimeout: const Duration(milliseconds: 10000),
-      receiveTimeout: const Duration(microseconds: 5000),
-      headers: {},
+      // connectTimeout: const Duration(milliseconds: 10000000),
+      // receiveTimeout: const Duration(microseconds: 5000),
+      headers: {
+        "X-Client": Platform.isAndroid ? apiAndriodKey : apiIOSKey,
+      },
       contentType: 'application/json; charset=utf-8',
       responseType: ResponseType.json,
     );
 
     dio = Dio(options);
 
-    (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
-      final client = HttpClient();
-      client.badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-      return client;
-    };
+    // (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
+    //   final client = HttpClient();
+    //   client.badCertificateCallback =
+    //       (X509Certificate cert, String host, int port) => true;
+    //   return client;
+    // };
 
-    CookieJar cookieJar = CookieJar();
-    dio.interceptors.add(CookieManager(cookieJar));
+    // CookieJar cookieJar = CookieJar();
+    // dio.interceptors.add(CookieManager(cookieJar));
     dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) {
         // Do something before request is sent
@@ -52,7 +52,6 @@ class HttpUtil {
         return handler.next(response); // continue
       },
       onError: (DioException e, handler) {
-        // Do something with response error
         Loading.dismiss();
         ErrorEntity eInfo = createErrorEntity(e);
         onError(eInfo);
@@ -66,26 +65,76 @@ class HttpUtil {
     switch (eInfo.code) {
       case 401:
         UserStore.to.onLogout();
-        EasyLoading.showError(eInfo.message);
+        MyDialog.error(
+          text: eInfo.message,
+          errorCode: eInfo.errorCode,
+        );
+        break;
+      case 400 || 422:
+        MyDialog.error(
+          text: eInfo.message,
+          errorCode: eInfo.errorCode,
+        );
         break;
       default:
-        EasyLoading.showError('未知错误');
+        MyDialog.error(
+          text: eInfo.message,
+          errorCode: eInfo.errorCode,
+        );
         break;
     }
   }
 
   ErrorEntity createErrorEntity(DioException error) {
+    var errorBase = ErrorBase.fromJson(error.response?.data);
+    if (errorBase.code == null) {
+      var validationModelError =
+          ValidationModelError.fromJson(error.response?.data);
+      var errorMessage = '';
+      validationModelError.errors?.asMap().forEach(
+            (i, v) =>
+                errorMessage += i == 0 ? v.message ?? "" : "\n \n${v.message}",
+          );
+      return ErrorEntity(
+        code: error.response?.statusCode,
+        message: errorMessage != ''
+            ? errorMessage
+            : "Something went wrong. Please try again later.",
+        errorCode: errorBase.code,
+      );
+    }
     switch (error.type) {
       case DioExceptionType.cancel:
-        return ErrorEntity(code: -1, message: "请求取消");
+        return ErrorEntity(
+          code: error.response?.statusCode,
+          message: "Operation cannceled",
+          errorCode: errorBase.code,
+        );
       case DioExceptionType.connectionTimeout:
-        return ErrorEntity(code: -1, message: "连接超时");
+        return ErrorEntity(
+          code: error.response?.statusCode,
+          message: "Connection timeout",
+          errorCode: errorBase.code,
+        );
       case DioExceptionType.sendTimeout:
-        return ErrorEntity(code: -1, message: "请求超时");
+        return ErrorEntity(
+          code: error.response?.statusCode,
+          message: "Send request timeout",
+          errorCode: errorBase.code,
+        );
       case DioExceptionType.receiveTimeout:
-        return ErrorEntity(code: -1, message: "响应超时");
+        return ErrorEntity(
+          code: error.response?.statusCode,
+          message: "Receive timeout",
+          errorCode: errorBase.code,
+        );
       default:
-        return ErrorEntity(code: -1, message: error.message ?? "");
+        return ErrorEntity(
+          code: error.response?.statusCode,
+          message: errorBase.message ??
+              "Something went wrong. Please try again later.",
+          errorCode: errorBase.code,
+        );
     }
   }
 
@@ -278,13 +327,18 @@ class HttpUtil {
 }
 
 class ErrorEntity implements Exception {
-  int code = -1;
+  int? code = 0;
   String message = "";
-  ErrorEntity({required this.code, required this.message});
+  String? errorCode;
+  ErrorEntity({
+    required this.code,
+    required this.message,
+    this.errorCode,
+  });
 
   @override
   String toString() {
     if (message == "") return "Exception";
-    return "Exception: code $code, $message";
+    return "Exception: code $code, errorCode $errorCode, $message";
   }
 }

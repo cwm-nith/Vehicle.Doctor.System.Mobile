@@ -13,7 +13,7 @@ class WelcomeController extends GetxController {
     super.onReady();
     myPrint("init page welcome");
     Future.delayed(
-      const Duration(seconds: 3),
+      const Duration(seconds: 2),
       () => Get.offAllNamed(AppRoutes.signIn),
     );
   }

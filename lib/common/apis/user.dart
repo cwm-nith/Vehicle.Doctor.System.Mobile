@@ -1,32 +1,32 @@
-import 'package:vehicle_doctor_mobile/common/entities/base.dart';
 import 'package:vehicle_doctor_mobile/common/entities/user.dart';
 import 'package:vehicle_doctor_mobile/common/utils/http.dart';
+import 'package:vehicle_doctor_mobile/features/signin/index.dart';
 
 class UserAPI {
-  static Future<UserLoginResponseEntity> login({
-    LoginRequestEntity? params,
+  static Future<UserEntity> login({
+    SigninRq? params,
   }) async {
     var response = await HttpUtil().post(
-      'api/login',
-      queryParameters: params?.toJson(),
+      'api/v1/auth/login',
+      data: params?.toJson(),
     );
-    return UserLoginResponseEntity.fromJson(response);
+    return UserEntity.fromJson(response);
   }
 
-  static Future<UserLoginResponseEntity> getProfile() async {
+  static Future<UserEntity> getProfile() async {
     var response = await HttpUtil().post(
       'api/get_profile',
     );
-    return UserLoginResponseEntity.fromJson(response);
+    return UserEntity.fromJson(response);
   }
 
-  static Future<BaseResponseEntity> updateProfile({
-    LoginRequestEntity? params,
+  static Future<UserEntity> updateProfile({
+    UpdateUserRq? params,
   }) async {
     var response = await HttpUtil().post(
       'api/update_profile',
       queryParameters: params?.toJson(),
     );
-    return BaseResponseEntity.fromJson(response);
+    return UserEntity.fromJson(response);
   }
 }

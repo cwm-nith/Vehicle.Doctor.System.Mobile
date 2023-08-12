@@ -1,5 +1,6 @@
 class AppRoutes {
   static const initial = '/';
+  static const landing = '/landing';
   static const signIn = '/sign_in';
   static const emailLogin = '/email_login';
   static const register = '/register';

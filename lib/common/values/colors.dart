@@ -1,12 +1,12 @@
 import 'dart:ui';
 
 class AppColors {
-  static const Color primaryBackground = Color.fromARGB(255, 255, 255, 255);
+  static const Color primaryBackground = Color.fromARGB(255, 182, 176, 176);
 
   static const Color primarySecondaryBackground =
       Color.fromARGB(255, 247, 247, 249);
 
-  static const Color primaryElement = Color.fromARGB(255, 74, 123, 246);
+  static const Color primaryElement = Color.fromARGB(223, 3, 172, 142);
 
   static const Color primaryText = Color.fromARGB(255, 32, 47, 62);
   static const Color primaryBg = Color.fromARGB(210, 32, 47, 62);
@@ -42,4 +42,7 @@ class AppColors {
   static const Color chatbg = Color.fromARGB(255, 248, 248, 248);
 
   static const Color morenbg = Color.fromARGB(255, 250, 250, 250);
+
+  static const Color dangerText = Color.fromARGB(255, 255, 5, 5);
+  static const Color dangerBg = Color.fromARGB(255, 255, 5, 5);
 }

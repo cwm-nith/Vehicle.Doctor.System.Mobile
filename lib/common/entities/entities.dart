@@ -5,3 +5,4 @@ export 'contact.dart';
 export 'chat.dart';
 export 'base.dart';
 export 'country.dart';
+export 'error_base.dart';
