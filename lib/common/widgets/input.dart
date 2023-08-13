@@ -16,13 +16,15 @@ Widget inputTextEdit({
   Widget? clearWidget,
   VoidCallback? onPressed,
   ValueChanged<String>? onchanged,
+  Color? bgColor,
+  EdgeInsetsGeometry? contentPadding,
 }) {
   return Container(
     height: height.h,
     margin: EdgeInsets.only(top: marginTop.h),
-    decoration: const BoxDecoration(
-      color: AppColors.secondaryElement,
-      borderRadius: Radii.k6pxRadius,
+    decoration: BoxDecoration(
+      color: bgColor ?? AppColors.secondaryElement,
+      borderRadius: Radii.k4pxRadius,
     ),
     child: TextField(
       scrollPadding: EdgeInsets.zero,
@@ -33,7 +35,8 @@ Widget inputTextEdit({
         hintText: hintText,
         suffixIcon: clearWidget,
         hintStyle: const TextStyle(color: AppColors.thirdElementText),
-        contentPadding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+        contentPadding:
+            contentPadding ?? const EdgeInsets.fromLTRB(20, 10, 20, 0),
         isDense: true,
         border: InputBorder.none,
       ),

@@ -10,9 +10,7 @@ import 'package:vehicle_doctor_mobile/common/store/store.dart';
 
 Future<void> main() async {
   await init();
-  // Setting.init(() {
   runApp(const MyApp());
-  // });
 }
 
 Future init() async {

@@ -12,6 +12,7 @@ class SigninPage extends GetView<SigninController> {
   Widget _inputField({
     TextEditingController? controller,
     String? text,
+    TextInputType keyboardType = TextInputType.text,
     bool isPassword = false,
   }) {
     return Column(
@@ -25,6 +26,7 @@ class SigninPage extends GetView<SigninController> {
           ),
         ),
         inputTextEdit(
+          keyboardType: keyboardType,
           hintText: text ?? "Name",
           controller: controller,
           isPassword: isPassword,
@@ -70,9 +72,9 @@ class SigninPage extends GetView<SigninController> {
                       height: 10.h,
                     ),
                     _inputField(
-                      controller: controller.phoneNumberTextController,
-                      text: "Phone Number",
-                    ),
+                        controller: controller.phoneNumberTextController,
+                        text: "Phone Number",
+                        keyboardType: const TextInputType.numberWithOptions()),
                     SizedBox(
                       height: 10.h,
                     ),

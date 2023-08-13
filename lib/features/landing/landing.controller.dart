@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:vehicle_doctor_mobile/common/routes/names.dart';
 import 'package:vehicle_doctor_mobile/common/store/user.dart';
 import 'package:vehicle_doctor_mobile/features/landing/index.dart';
 
@@ -13,6 +14,10 @@ class LandingController extends GetxController {
 
   void updatePushNotificationSetting(bool val) {
     state.pushNotification.value = val;
+  }
+
+  void goProfileDetail() {
+    Get.toNamed(AppRoutes.profileDetail);
   }
 
   Future logout() async {

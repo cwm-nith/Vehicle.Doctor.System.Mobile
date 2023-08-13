@@ -1,5 +1,5 @@
 class UserEntity {
-  final int? id;
+  int id;
   final String? name;
   final String? username;
   final String? phoneNumber;
@@ -13,7 +13,7 @@ class UserEntity {
   final DateTime? deletedBy;
 
   UserEntity({
-    this.id,
+    this.id = 0,
     this.name,
     this.username,
     this.phoneNumber,

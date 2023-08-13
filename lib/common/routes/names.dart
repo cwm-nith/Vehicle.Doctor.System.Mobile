@@ -14,7 +14,7 @@ class AppRoutes {
   // message
   static const message = '/message';
 
-  static const profile = '/profile';
+  static const profileDetail = '/profile_detail';
   //chat
   static const chat = '/chat';
 

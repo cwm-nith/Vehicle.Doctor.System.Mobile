@@ -14,34 +14,34 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primaryBackground.withOpacity(0.8),
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(20.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 50.h,
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 100.w,
-                    height: 90.h,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.primaryBg),
-                      borderRadius: BorderRadius.circular(10.w),
+      body: Obx(
+        () => SafeArea(
+          child: Padding(
+            padding: EdgeInsets.all(20.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 50.h,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 100.w,
+                      height: 90.h,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: AppColors.primaryBg),
+                        borderRadius: BorderRadius.circular(10.w),
+                      ),
+                      child: const Center(
+                        child: Text("Image"),
+                      ),
                     ),
-                    child: const Center(
-                      child: Text("Image"),
+                    SizedBox(
+                      width: 20.w,
                     ),
-                  ),
-                  SizedBox(
-                    width: 20.w,
-                  ),
-                  Obx(
-                    () => Expanded(
+                    Expanded(
                       child: Padding(
                         padding: EdgeInsets.only(top: 10.0.w),
                         child: Column(
@@ -70,130 +70,167 @@ class Profile extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 30.h,
-              ),
-              Text(
-                "PROFILE",
-                style: TextStyle(
-                  fontSize: 18.sp,
-                  color: AppColors.primaryText.withOpacity(0.5),
-                ),
-              ),
-              SizedBox(
-                height: 30.h,
-              ),
-              GestureDetector(
-                onTap: () {
-                  myPrint("View Profile");
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Icon(
-                      Icons.person_outlined,
-                      size: 25.0.w,
-                      color: AppColors.secondaryElementText,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Profile Details",
-                          style: TextStyle(
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        Text(
-                          "View & Edit Details",
-                          style: TextStyle(
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.primaryText.withOpacity(0.5),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      width: 90.w,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 8.0.w),
-                      child: Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        size: 20.0.w,
-                        color: AppColors.secondaryElementText,
-                      ),
-                    ),
                   ],
                 ),
-              ),
-              Divider(
-                height: 40.h,
-                thickness: 1,
-              ),
-              SizedBox(
-                height: 30.h,
-              ),
-              Text(
-                "SETTINGS",
-                style: TextStyle(
-                  fontSize: 18.sp,
-                  color: AppColors.primaryText.withOpacity(0.5),
+                SizedBox(
+                  height: 30.h,
                 ),
-              ),
-              SizedBox(
-                height: 30.h,
-              ),
-              GestureDetector(
-                onTap: () {
-                  myPrint("Notification");
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Icon(
-                      Icons.notifications_none_outlined,
-                      size: 25.0.w,
-                      color: AppColors.secondaryElementText,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Push Notifications",
-                          style: TextStyle(
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.w500,
+                Text(
+                  "PROFILE",
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    color: AppColors.primaryText.withOpacity(0.5),
+                  ),
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    controller.goProfileDetail();
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.person_outlined,
+                        size: 25.0.w,
+                        color: AppColors.secondaryElementText,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Profile Details",
+                            style: TextStyle(
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        Text(
-                          "On",
-                          style: TextStyle(
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.primaryText.withOpacity(0.5),
+                          SizedBox(
+                            height: 5.h,
                           ),
+                          Text(
+                            "View & Edit Details",
+                            style: TextStyle(
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.primaryText.withOpacity(0.5),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        width: 90.w,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 8.0.w),
+                        child: Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          size: 20.0.w,
+                          color: AppColors.secondaryElementText,
                         ),
-                      ],
-                    ),
-                    SizedBox(
-                      width: 60.w,
-                    ),
-                    Obx(
-                      () => Padding(
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    // controller.goProfileDetail();
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.password_rounded,
+                        size: 25.0.w,
+                        color: AppColors.secondaryElementText,
+                      ),
+                      Text(
+                        "Change Password",
+                        style: TextStyle(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 90.w,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 8.0.w),
+                        child: Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          size: 20.0.w,
+                          color: AppColors.secondaryElementText,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Divider(
+                  height: 40.h,
+                  thickness: 1,
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+                Text(
+                  "SETTINGS",
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    color: AppColors.primaryText.withOpacity(0.5),
+                  ),
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    myPrint("Notification");
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.notifications_none_outlined,
+                        size: 25.0.w,
+                        color: AppColors.secondaryElementText,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Push Notifications",
+                            style: TextStyle(
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          Text(
+                            controller.state.pushNotification.value
+                                ? "On"
+                                : "Off",
+                            style: TextStyle(
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.primaryText.withOpacity(0.5),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        width: 60.w,
+                      ),
+                      Padding(
                         padding: EdgeInsets.only(top: 8.0.w),
                         child: Switch(
                           activeColor: AppColors.secondaryElementText,
@@ -203,30 +240,30 @@ class Profile extends StatelessWidget {
                           },
                         ),
                       ),
+                    ],
+                  ),
+                ),
+                Divider(
+                  height: 40.h,
+                  thickness: 1,
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Container(),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    btnFlatButtonWidget(
+                      onPressed: () async {
+                        await controller.logout();
+                      },
+                      title: "Logout",
                     ),
                   ],
                 ),
-              ),
-              Divider(
-                height: 40.h,
-                thickness: 1,
-              ),
-              Expanded(
-                flex: 1,
-                child: Container(),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  btnFlatButtonWidget(
-                    onPressed: () async {
-                      await controller.logout();
-                    },
-                    title: "Logout",
-                  ),
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

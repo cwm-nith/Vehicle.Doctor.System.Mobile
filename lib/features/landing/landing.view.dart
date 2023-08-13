@@ -20,58 +20,71 @@ class LandingPage extends GetView<LandingController> {
   );
 
   buildBottomNavigationMenu(
-      BuildContext context, LandingController landingPageController) {
+    BuildContext context,
+    LandingController landingPageController,
+  ) {
     return Obx(
-      () => MediaQuery(
-        data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-        child: SizedBox(
-          height: 64.h,
-          child: BottomNavigationBar(
-            showUnselectedLabels: true,
-            showSelectedLabels: true,
-            onTap: landingPageController.changeTabIndex,
-            currentIndex: landingPageController.state.tabIndex.value,
-            backgroundColor: AppColors.primaryBackground,
-            unselectedItemColor: AppColors.primaryElementText.withOpacity(0.7),
-            selectedItemColor: AppColors.primaryElementText,
-            unselectedLabelStyle: unselectedLabelStyle,
-            selectedLabelStyle: selectedLabelStyle,
-            items: [
-              BottomNavigationBarItem(
-                icon: Container(
-                  margin: EdgeInsets.only(bottom: 7.w),
-                  child: Icon(
-                    Icons.search,
-                    size: 25.0.w,
-                  ),
+      () => Container(
+        height: 64.h,
+        decoration: BoxDecoration(
+          // gradient: LinearGradient(
+          //   colors: [
+          //     Color.fromARGB(255, 176, 106, 231),
+          //     Color.fromARGB(255, 166, 112, 232),
+          //     Color.fromARGB(255, 131, 123, 232),
+          //     Color.fromARGB(255, 104, 132, 231),
+          //   ],
+          //   transform: GradientRotation(90),
+          // ),
+          // boxShadow: [],
+          color: AppColors.secondaryElementText.withOpacity(0.9),
+        ),
+        child: BottomNavigationBar(
+          showUnselectedLabels: true,
+          showSelectedLabels: true,
+          onTap: landingPageController.changeTabIndex,
+          currentIndex: landingPageController.state.tabIndex.value,
+          backgroundColor: AppColors.transparent,
+          unselectedItemColor: AppColors.primaryBackground,
+          selectedItemColor: AppColors.primaryElementText,
+          unselectedLabelStyle: unselectedLabelStyle,
+          selectedLabelStyle: selectedLabelStyle,
+          elevation: 0.0,
+          items: [
+            BottomNavigationBarItem(
+              icon: Container(
+                margin: EdgeInsets.only(bottom: 7.w),
+                child: Icon(
+                  Icons.explore_rounded,
+                  size: 25.0.w,
                 ),
-                label: 'Explore',
-                backgroundColor: AppColors.primaryBg,
               ),
-              BottomNavigationBarItem(
-                icon: Container(
-                  margin: EdgeInsets.only(bottom: 7.w),
-                  child: Icon(
-                    Icons.location_history,
-                    size: 25.0.w,
-                  ),
+              label: 'Explore',
+              backgroundColor: AppColors.primaryBg,
+            ),
+            BottomNavigationBarItem(
+              icon: Container(
+                margin: EdgeInsets.only(bottom: 7.w),
+                child: Icon(
+                  Icons.maps_home_work_rounded,
+                  size: 25.0.w,
                 ),
-                label: 'Places',
-                backgroundColor: AppColors.primaryBg,
               ),
-              BottomNavigationBarItem(
-                icon: Container(
-                  margin: EdgeInsets.only(bottom: 7.w),
-                  child: Icon(
-                    Icons.settings,
-                    size: 25.0.w,
-                  ),
+              label: 'Places',
+              backgroundColor: AppColors.primaryBg,
+            ),
+            BottomNavigationBarItem(
+              icon: Container(
+                margin: EdgeInsets.only(bottom: 7.w),
+                child: Icon(
+                  Icons.settings,
+                  size: 25.0.w,
                 ),
-                label: 'Profile',
-                backgroundColor: AppColors.primaryBg,
               ),
-            ],
-          ),
+              label: 'Profile',
+              backgroundColor: AppColors.primaryBg,
+            ),
+          ],
         ),
       ),
     );

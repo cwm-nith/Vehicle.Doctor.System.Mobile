@@ -10,7 +10,16 @@ String timeFormated(String? time) {
   return formatter.format(now);
 }
 
-/// 格式化时间
+String dateTimeFormated(DateTime time, {bool formatWithTime = false}) {
+  const format = "dd-MM-yyyy";
+  if (formatWithTime) {
+    final DateFormat formatter = DateFormat(format, Platform.localeName);
+    return formatter.add_jms().format(time.toLocal());
+  }
+  final DateFormat formatter = DateFormat(format, Platform.localeName);
+  return formatter.format(time.toLocal());
+}
+
 String duTimeLineFormat(DateTime dt) {
   var now = DateTime.now();
   var difference = now.difference(dt);

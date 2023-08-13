@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vehicle_doctor_mobile/features/Welcome/index.dart';
 import 'package:vehicle_doctor_mobile/features/landing/index.dart';
+import 'package:vehicle_doctor_mobile/features/profile_detail/index.dart';
 import 'package:vehicle_doctor_mobile/features/register/index.dart';
 import 'package:vehicle_doctor_mobile/features/signin/index.dart';
 
@@ -32,6 +33,10 @@ class AppPages {
       page: () => LandingPage(),
       binding: LandingBinding(),
     ),
+    GetPage(
+        name: AppRoutes.profileDetail,
+        page: () => const ProfileDetailPage(),
+        binding: ProfileDetailBinding()),
     /*
     // GetPage(
     //   name: AppRoutes.Application,
@@ -55,7 +60,7 @@ class AppPages {
        RouteAuthMiddleware(priority: 1),
      ],),
     //我的
-    GetPage(name: AppRoutes.Profile, page: () => ProfilePage(), binding: ProfileBinding()),
+    
     //聊天详情
     GetPage(name: AppRoutes.Chat, page: () => ChatPage(), binding: ChatBinding()),
 

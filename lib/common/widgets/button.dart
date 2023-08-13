@@ -8,7 +8,7 @@ Widget btnFlatButtonWidget({
   required VoidCallback onPressed,
   double width = 140,
   double height = 44,
-  Color gbColor = AppColors.primaryElement,
+  Color gbColor = AppColors.secondaryElementText,
   String title = "button",
   Color fontColor = AppColors.primaryElementText,
   double fontSize = 16,
@@ -38,10 +38,10 @@ Widget btnFlatButtonWidget({
           if (states.contains(MaterialState.pressed)) {
             return Colors.blue[200];
           }
-          return gbColor;
+          return gbColor.withOpacity(0.9);
         }),
         shape: MaterialStateProperty.all(const RoundedRectangleBorder(
-          borderRadius: Radii.k6pxRadius,
+          borderRadius: Radii.k4pxRadius,
         )),
       ),
       onPressed: onPressed,

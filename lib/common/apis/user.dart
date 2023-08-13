@@ -20,12 +20,13 @@ class UserAPI {
     return UserEntity.fromJson(response);
   }
 
-  static Future<UserEntity> updateProfile({
-    UpdateUserRq? params,
+  static Future<UserEntity> updateProfile(
+    int id, {
+    UpdateUserRq? body,
   }) async {
-    var response = await HttpUtil().post(
-      'api/update_profile',
-      queryParameters: params?.toJson(),
+    var response = await HttpUtil().put(
+      '/api/v1/user/$id',
+      data: body?.toJson(),
     );
     return UserEntity.fromJson(response);
   }
