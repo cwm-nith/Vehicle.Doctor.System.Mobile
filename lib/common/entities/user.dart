@@ -81,3 +81,31 @@ class UpdateUserRq {
         "name": name,
       };
 }
+
+class RegisterUserRq {
+  final String? name;
+  final String? username;
+  final String? password;
+  final String? phoneNumber;
+
+  RegisterUserRq({
+    this.name,
+    this.username,
+    this.password,
+    this.phoneNumber,
+  });
+
+  factory RegisterUserRq.fromJson(Map<String, dynamic> json) => RegisterUserRq(
+        name: json["name"],
+        username: json["username"],
+        password: json["password"],
+        phoneNumber: json["phoneNumber"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "username": username,
+        "password": password,
+        "phoneNumber": phoneNumber,
+      };
+}

@@ -30,4 +30,12 @@ class UserAPI {
     );
     return UserEntity.fromJson(response);
   }
+
+  static Future<UserEntity> registerUser(RegisterUserRq? body) async {
+    var response = await HttpUtil().post(
+      '/api/v1/user',
+      data: body?.toJson(),
+    );
+    return UserEntity.fromJson(response);
+  }
 }

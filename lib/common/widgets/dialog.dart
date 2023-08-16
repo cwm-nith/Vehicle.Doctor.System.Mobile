@@ -19,7 +19,7 @@ class MyDialog {
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
                 height: 20.h,
@@ -30,7 +30,7 @@ class MyDialog {
                 child: Text(
                   text,
                   style: TextStyle(
-                    fontSize: 14.sp,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w500,
                   ),
                 ),

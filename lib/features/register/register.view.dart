@@ -7,7 +7,11 @@ import 'package:vehicle_doctor_mobile/features/register/index.dart';
 
 class RegisterPage extends GetView<RegisterController> {
   const RegisterPage({super.key});
-  Widget _inputField({TextEditingController? controller, String? text}) {
+  Widget _inputField({
+    TextEditingController? controller,
+    String? text,
+    bool isPassword = false,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -21,6 +25,7 @@ class RegisterPage extends GetView<RegisterController> {
         inputTextEdit(
           hintText: text ?? "Name",
           controller: controller,
+          isPassword: isPassword,
         ),
       ],
     );
@@ -46,7 +51,7 @@ class RegisterPage extends GetView<RegisterController> {
                     Padding(
                       padding: EdgeInsets.all(18.w),
                       child: Text(
-                        "Sign In",
+                        controller.title,
                         style: TextStyle(
                           fontSize: 45.sp,
                           fontWeight: FontWeight.bold,
@@ -65,6 +70,13 @@ class RegisterPage extends GetView<RegisterController> {
                       height: 10.h,
                     ),
                     _inputField(
+                      controller: controller.usernameTextController,
+                      text: "Username",
+                    ),
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    _inputField(
                       controller: controller.phoneNumberTextController,
                       text: "Phone Number",
                     ),
@@ -74,6 +86,7 @@ class RegisterPage extends GetView<RegisterController> {
                     _inputField(
                       controller: controller.passwordTextController,
                       text: "Password",
+                      isPassword: true,
                     ),
                     SizedBox(
                       height: 10.h,
@@ -81,6 +94,7 @@ class RegisterPage extends GetView<RegisterController> {
                     _inputField(
                       controller: controller.confirmPasswordTextController,
                       text: "Confirm Password",
+                      isPassword: true,
                     ),
                     SizedBox(
                       height: 30.h,
@@ -115,7 +129,9 @@ class RegisterPage extends GetView<RegisterController> {
                     ),
                     btnFlatButtonWidget(
                       title: "Sign Up",
-                      onPressed: () {},
+                      onPressed: () async {
+                        await controller.registerUser();
+                      },
                     ),
                   ],
                 ),

@@ -11,4 +11,10 @@ class UserService extends GetxService {
     UserStore.to.saveProfile(updatedUser);
     return updatedUser;
   }
+
+  Future<UserEntity> registerUserAsync(RegisterUserRq body) async {
+    var updatedUser = await UserAPI.registerUser(body);
+    // UserStore.to.saveProfile(updatedUser);
+    return updatedUser;
+  }
 }

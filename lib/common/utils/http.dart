@@ -22,7 +22,7 @@ class HttpUtil {
       baseUrl: serverApiUrl,
 
       // baseUrl: storage.read(key: STORAGE_KEY_APIURL) ?? SERVICE_API_BASEURL,
-      // connectTimeout: const Duration(milliseconds: 10000000),
+      connectTimeout: const Duration(seconds: 5),
       // receiveTimeout: const Duration(microseconds: 5000),
       headers: {
         "X-Client": Platform.isAndroid ? apiAndriodKey : apiIOSKey,
@@ -86,54 +86,58 @@ class HttpUtil {
   }
 
   ErrorEntity createErrorEntity(DioException error) {
-    var errorBase = ErrorBase.fromJson(error.response?.data);
-    if (errorBase.code == null) {
-      var validationModelError =
-          ValidationModelError.fromJson(error.response?.data);
-      var errorMessage = '';
-      validationModelError.errors?.asMap().forEach(
-            (i, v) =>
-                errorMessage += i == 0 ? v.message ?? "" : "\n \n${v.message}",
-          );
-      return ErrorEntity(
-        code: error.response?.statusCode,
-        message: errorMessage != ''
-            ? errorMessage
-            : "Something went wrong. Please try again later.",
-        errorCode: errorBase.code,
-      );
-    }
-    switch (error.type) {
-      case DioExceptionType.cancel:
+    if (error.response?.data != null) {
+      var errorBase = ErrorBase.fromJson(error.response?.data);
+      if (errorBase.code == null) {
+        var validationModelError =
+            ValidationModelError.fromJson(error.response?.data);
+        var errorMessage = '';
+        validationModelError.errors?.asMap().forEach(
+              (i, v) => errorMessage +=
+                  i == 0 ? v.message ?? "" : "\n \n${v.message}",
+            );
         return ErrorEntity(
           code: error.response?.statusCode,
-          message: "Operation cannceled",
+          message: errorMessage != ''
+              ? errorMessage
+              : "Something went wrong. Please try again later.",
           errorCode: errorBase.code,
         );
-      case DioExceptionType.connectionTimeout:
-        return ErrorEntity(
-          code: error.response?.statusCode,
-          message: "Connection timeout",
-          errorCode: errorBase.code,
-        );
-      case DioExceptionType.sendTimeout:
-        return ErrorEntity(
-          code: error.response?.statusCode,
-          message: "Send request timeout",
-          errorCode: errorBase.code,
-        );
-      case DioExceptionType.receiveTimeout:
-        return ErrorEntity(
-          code: error.response?.statusCode,
-          message: "Receive timeout",
-          errorCode: errorBase.code,
-        );
-      default:
+      } else {
         return ErrorEntity(
           code: error.response?.statusCode,
           message: errorBase.message ??
               "Something went wrong. Please try again later.",
           errorCode: errorBase.code,
+        );
+      }
+    }
+
+    switch (error.type) {
+      case DioExceptionType.cancel:
+        return ErrorEntity(
+          code: error.response?.statusCode,
+          message: "Operation cannceled",
+        );
+      case DioExceptionType.connectionTimeout:
+        return ErrorEntity(
+          code: error.response?.statusCode,
+          message: "Connection timeout",
+        );
+      case DioExceptionType.sendTimeout:
+        return ErrorEntity(
+          code: error.response?.statusCode,
+          message: "Send request timeout",
+        );
+      case DioExceptionType.receiveTimeout:
+        return ErrorEntity(
+          code: error.response?.statusCode,
+          message: "Receive timeout",
+        );
+      default:
+        return ErrorEntity(
+          code: error.response?.statusCode,
+          message: "Something went wrong. Please try again later.",
         );
     }
   }
