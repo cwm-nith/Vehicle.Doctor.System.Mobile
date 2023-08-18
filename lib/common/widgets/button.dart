@@ -10,7 +10,7 @@ Widget btnFlatButtonWidget({
   double height = 44,
   Color gbColor = AppColors.secondaryElementText,
   String title = "button",
-  Color fontColor = AppColors.primaryElementText,
+  Color fontColor = AppColors.primaryText,
   double fontSize = 16,
   String fontName = "Montserrat",
   FontWeight fontWeight = FontWeight.w400,

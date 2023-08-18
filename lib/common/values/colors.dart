@@ -2,19 +2,15 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static const Color transparent = Colors.transparent;
-  static const Color primaryBackground = Color.fromARGB(255, 204, 202, 202);
+  static const Color primaryBackground = Color.fromARGB(255, 26, 26, 26);
 
   static const Color primarySecondaryBackground =
       Color.fromARGB(255, 247, 247, 249);
 
-  static const Color primaryElement = Color.fromARGB(223, 3, 172, 142);
+  static const Color primaryElement = Color.fromARGB(223, 96, 96, 96);
 
-  static const Color primaryText = Color.fromARGB(255, 32, 47, 62);
-  static const Color primaryBg = Color.fromARGB(210, 32, 47, 62);
-
-  static const Color primaryElementText = Color.fromARGB(255, 255, 255, 255);
-  static const Color primarySecondaryElementText =
-      Color.fromARGB(255, 194, 197, 201);
+  static const Color primaryText = Color.fromARGB(255, 255, 255, 255);
+  static const Color primaryBg = Color.fromARGB(255, 255, 255, 255);
 
   static const Color primaryThreeElementText = Color.fromARGB(255, 99, 99, 99);
   static const Color primaryElementStatus = Color.fromARGB(255, 88, 174, 127);
@@ -25,7 +21,7 @@ class AppColors {
 
   static const Color secondaryElement = Color.fromARGB(255, 247, 247, 249);
 
-  static const Color secondaryElementText = Color.fromARGB(255, 74, 123, 246);
+  static const Color secondaryElementText = Color.fromARGB(255, 60, 113, 248);
 
   // *****************************************
 

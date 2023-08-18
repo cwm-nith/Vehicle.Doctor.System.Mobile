@@ -23,6 +23,7 @@ class SigninPage extends GetView<SigninController> {
           style: TextStyle(
             fontSize: 16.sp,
             fontWeight: FontWeight.bold,
+            color: AppColors.primaryText.withOpacity(0.8),
           ),
         ),
         inputTextEdit(
@@ -30,6 +31,7 @@ class SigninPage extends GetView<SigninController> {
           hintText: text ?? "Name",
           controller: controller,
           isPassword: isPassword,
+          bgColor: AppColors.primaryElement,
         ),
       ],
     );
@@ -60,16 +62,9 @@ class SigninPage extends GetView<SigninController> {
                           fontSize: 45.sp,
                           fontWeight: FontWeight.bold,
                           fontFamily: "monsterrat",
+                          color: AppColors.primaryText.withOpacity(0.8),
                         ),
                       ),
-                    ),
-                    Obx(
-                      () => controller.state.user.value.name != null
-                          ? Text(controller.state.user.value.name ?? "null")
-                          : Container(),
-                    ),
-                    SizedBox(
-                      height: 10.h,
                     ),
                     _inputField(
                         controller: controller.phoneNumberTextController,
@@ -97,7 +92,8 @@ class SigninPage extends GetView<SigninController> {
                             child: Text(
                               "Forgot Password",
                               style: TextStyle(
-                                color: AppColors.primaryElement,
+                                color: AppColors.secondaryElementText
+                                    .withOpacity(0.8),
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "monsterrat",
@@ -119,6 +115,7 @@ class SigninPage extends GetView<SigninController> {
                             fontSize: 15.sp,
                             fontWeight: FontWeight.bold,
                             fontFamily: "monsterrat",
+                            color: AppColors.primaryText.withOpacity(0.8),
                           ),
                         ),
                         GestureDetector(
@@ -128,7 +125,8 @@ class SigninPage extends GetView<SigninController> {
                           child: Text(
                             "Register here",
                             style: TextStyle(
-                              color: AppColors.primaryElement,
+                              color: AppColors.secondaryElementText
+                                  .withOpacity(0.8),
                               fontSize: 15.sp,
                               fontWeight: FontWeight.bold,
                               fontFamily: "monsterrat",

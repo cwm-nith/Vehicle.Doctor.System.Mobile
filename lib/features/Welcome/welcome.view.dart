@@ -14,7 +14,7 @@ class WelcomePage extends GetView<WelcomeController> {
         child: Text(
           title,
           style: TextStyle(
-            color: AppColors.primaryElementText,
+            color: AppColors.primaryText,
             fontFamily: "Monsterrat",
             fontWeight: FontWeight.bold,
             fontSize: 45.sp,
@@ -27,7 +27,7 @@ class WelcomePage extends GetView<WelcomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryElement,
+      backgroundColor: AppColors.primaryBackground,
       body: SizedBox(
         width: 360.w,
         height: 780.h,

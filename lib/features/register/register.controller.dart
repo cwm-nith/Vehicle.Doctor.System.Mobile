@@ -49,8 +49,18 @@ class RegisterController extends GetxController {
     var user = await UserService.to.registerUserAsync(body);
     if (user.id > 0) {
       EasyLoading.dismiss();
-      Get.toNamed(AppRoutes.signIn);
+      Get.offAllNamed(AppRoutes.signIn);
     }
     EasyLoading.dismiss();
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    nameTextController.dispose();
+    usernameTextController.dispose();
+    phoneNumberTextController.dispose();
+    passwordTextController.dispose();
+    confirmPasswordTextController.dispose();
   }
 }

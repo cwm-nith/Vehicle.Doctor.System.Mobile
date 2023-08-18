@@ -1,5 +1,6 @@
 class AppRoutes {
   static const initial = '/';
+  static const account = '/account';
   static const landing = '/landing';
   static const signIn = '/sign_in';
   static const emailLogin = '/email_login';
@@ -8,6 +9,7 @@ class AppRoutes {
   static const phone = '/phone';
   static const sendCode = '/SendCode';
   static const notFound = '/not_found';
+  static const changePassword = "/change_password";
 
   //contact
   static const contact = '/contact';

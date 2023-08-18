@@ -44,15 +44,17 @@ class HttpUtil {
     // dio.interceptors.add(CookieManager(cookieJar));
     dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) {
-        // Do something before request is sent
+        myPrint("Request body => ${options.data.toString()}");
         return handler.next(options); //continue
       },
       onResponse: (response, handler) {
         // Do something with response data
+        myPrint("Response body => ${response.toString()}");
         return handler.next(response); // continue
       },
       onError: (DioException e, handler) {
         Loading.dismiss();
+        myPrint("Error body => ${e.response.toString()}");
         ErrorEntity eInfo = createErrorEntity(e);
         onError(eInfo);
         return handler.next(e); //continue

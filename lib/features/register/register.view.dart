@@ -20,12 +20,14 @@ class RegisterPage extends GetView<RegisterController> {
           style: TextStyle(
             fontSize: 16.sp,
             fontWeight: FontWeight.bold,
+            color: AppColors.primaryText.withOpacity(0.8),
           ),
         ),
         inputTextEdit(
           hintText: text ?? "Name",
           controller: controller,
           isPassword: isPassword,
+          bgColor: AppColors.primaryElement,
         ),
       ],
     );
@@ -56,6 +58,7 @@ class RegisterPage extends GetView<RegisterController> {
                           fontSize: 45.sp,
                           fontWeight: FontWeight.bold,
                           fontFamily: "monsterrat",
+                          color: AppColors.primaryText.withOpacity(0.8),
                         ),
                       ),
                     ),
@@ -108,6 +111,7 @@ class RegisterPage extends GetView<RegisterController> {
                             fontSize: 15.sp,
                             fontWeight: FontWeight.bold,
                             fontFamily: "monsterrat",
+                            color: AppColors.primaryText.withOpacity(0.8),
                           ),
                         ),
                         GestureDetector(
@@ -115,7 +119,8 @@ class RegisterPage extends GetView<RegisterController> {
                           child: Text(
                             "Login here",
                             style: TextStyle(
-                              color: AppColors.primaryElement,
+                              color: AppColors.secondaryElementText
+                                  .withOpacity(0.8),
                               fontSize: 15.sp,
                               fontWeight: FontWeight.bold,
                               fontFamily: "monsterrat",

@@ -17,4 +17,9 @@ class UserService extends GetxService {
     // UserStore.to.saveProfile(updatedUser);
     return updatedUser;
   }
+
+  Future<bool> changePasswordAsync(ChangePasswordRq body) async {
+    var updatedUser = await UserAPI.changePasswordAsync(body);
+    return updatedUser;
+  }
 }

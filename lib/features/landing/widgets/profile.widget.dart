@@ -13,7 +13,7 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryBackground.withOpacity(0.8),
+      backgroundColor: AppColors.primaryBackground,
       body: Obx(
         () => SafeArea(
           child: Padding(
@@ -24,53 +24,53 @@ class Profile extends StatelessWidget {
                 SizedBox(
                   height: 50.h,
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 100.w,
-                      height: 90.h,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.primaryBg),
-                        borderRadius: BorderRadius.circular(10.w),
-                      ),
-                      child: const Center(
-                        child: Text("Image"),
-                      ),
+                GestureDetector(
+                  onTap: () {
+                    myPrint("Going to account");
+                    controller.goAccount();
+                  },
+                  child: Container(
+                    padding: EdgeInsets.only(
+                      left: 5.w,
+                      top: 5.h,
+                      bottom: 5.h,
                     ),
-                    SizedBox(
-                      width: 20.w,
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryElement.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(10.w),
                     ),
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 10.0.w),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "${UserStore.to.profile.name}, ${UserStore.to.profile.username}",
-                              style: TextStyle(
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "montserrat",
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10.h,
-                            ),
-                            Text(
-                              UserStore.to.profile.phoneNumber ?? "",
-                              style: TextStyle(
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.w400,
-                                fontFamily: "montserrat",
-                              ),
-                            ),
-                          ],
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 70.w,
+                          height: 70.h,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: AppColors.primaryBg),
+                            borderRadius: BorderRadius.circular(50.w),
+                          ),
+                          child: const Center(
+                            child: Text("Image"),
+                          ),
                         ),
-                      ),
+                        SizedBox(
+                          width: 20.w,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 20.h),
+                          child: Text(
+                            "${UserStore.to.profile.name}",
+                            style: TextStyle(
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "montserrat",
+                              color: AppColors.primaryText,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
                 SizedBox(
                   height: 30.h,
@@ -79,7 +79,7 @@ class Profile extends StatelessWidget {
                   "PROFILE",
                   style: TextStyle(
                     fontSize: 18.sp,
-                    color: AppColors.primaryText.withOpacity(0.5),
+                    color: AppColors.primaryText.withOpacity(0.7),
                   ),
                 ),
                 SizedBox(
@@ -106,6 +106,7 @@ class Profile extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 18.sp,
                               fontWeight: FontWeight.w500,
+                              color: AppColors.primaryText.withOpacity(0.8),
                             ),
                           ),
                           SizedBox(
@@ -116,7 +117,7 @@ class Profile extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 15.sp,
                               fontWeight: FontWeight.w400,
-                              color: AppColors.primaryText.withOpacity(0.5),
+                              color: AppColors.primaryText.withOpacity(0.7),
                             ),
                           ),
                         ],
@@ -140,7 +141,7 @@ class Profile extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // controller.goProfileDetail();
+                    controller.goChangeProfile();
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -156,6 +157,7 @@ class Profile extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w500,
+                          color: AppColors.primaryText.withOpacity(0.8),
                         ),
                       ),
                       SizedBox(
@@ -183,7 +185,7 @@ class Profile extends StatelessWidget {
                   "SETTINGS",
                   style: TextStyle(
                     fontSize: 18.sp,
-                    color: AppColors.primaryText.withOpacity(0.5),
+                    color: AppColors.primaryText.withOpacity(0.7),
                   ),
                 ),
                 SizedBox(
@@ -210,6 +212,7 @@ class Profile extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 18.sp,
                               fontWeight: FontWeight.w500,
+                              color: AppColors.primaryText.withOpacity(0.8),
                             ),
                           ),
                           SizedBox(
@@ -222,7 +225,7 @@ class Profile extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 15.sp,
                               fontWeight: FontWeight.w400,
-                              color: AppColors.primaryText.withOpacity(0.5),
+                              color: AppColors.primaryText.withOpacity(0.7),
                             ),
                           ),
                         ],
@@ -234,6 +237,8 @@ class Profile extends StatelessWidget {
                         padding: EdgeInsets.only(top: 8.0.w),
                         child: Switch(
                           activeColor: AppColors.secondaryElementText,
+                          inactiveTrackColor:
+                              AppColors.primaryText.withOpacity(0.5),
                           value: controller.state.pushNotification.value,
                           onChanged: (value) {
                             controller.updatePushNotificationSetting(value);
@@ -247,9 +252,8 @@ class Profile extends StatelessWidget {
                   height: 40.h,
                   thickness: 1,
                 ),
-                Expanded(
-                  flex: 1,
-                  child: Container(),
+                SizedBox(
+                  height: 40.h,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

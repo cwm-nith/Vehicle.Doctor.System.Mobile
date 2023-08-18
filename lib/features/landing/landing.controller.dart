@@ -20,6 +20,14 @@ class LandingController extends GetxController {
     Get.toNamed(AppRoutes.profileDetail);
   }
 
+  void goAccount() {
+    Get.toNamed(AppRoutes.account);
+  }
+
+  void goChangeProfile() {
+    Get.toNamed(AppRoutes.changePassword);
+  }
+
   Future logout() async {
     await UserStore.to.onLogout();
   }

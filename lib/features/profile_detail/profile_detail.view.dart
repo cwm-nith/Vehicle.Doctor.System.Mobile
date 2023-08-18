@@ -21,7 +21,7 @@ class ProfileDetailPage extends GetView<ProfileDetailController> {
       width: MediaQuery.of(context).size.width,
       height: 70.h,
       decoration: BoxDecoration(
-        color: AppColors.primarySecondaryBackground.withOpacity(0.3),
+        color: AppColors.primaryElement,
         borderRadius: BorderRadius.circular(10.w),
       ),
       child: Row(
@@ -38,7 +38,7 @@ class ProfileDetailPage extends GetView<ProfileDetailController> {
             endIndent: 10.h,
             indent: 10.h,
             thickness: 1.w,
-            color: AppColors.primaryBackground,
+            color: AppColors.primaryBackground.withOpacity(0.5),
           ),
           Expanded(
             child: Column(
@@ -47,8 +47,8 @@ class ProfileDetailPage extends GetView<ProfileDetailController> {
               children: [
                 Text(
                   label ?? "Name",
-                  style: TextStyle(
-                    color: AppColors.primaryText.withOpacity(0.5),
+                  style: const TextStyle(
+                    color: AppColors.primaryText,
                   ),
                 ),
                 ...[
@@ -119,7 +119,7 @@ class ProfileDetailPage extends GetView<ProfileDetailController> {
               child: Icon(
                 Icons.edit,
                 size: 25.0.w,
-                color: AppColors.primaryElementText.withOpacity(0.8),
+                color: AppColors.primaryText.withOpacity(0.8),
               ),
             ),
           ),
@@ -131,7 +131,7 @@ class ProfileDetailPage extends GetView<ProfileDetailController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.secondaryElementText,
+      backgroundColor: AppColors.primaryBackground,
       appBar: transparentAppBar(
         title: SizedBox(
           width: 200.w,

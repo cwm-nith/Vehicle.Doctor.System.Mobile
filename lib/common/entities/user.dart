@@ -109,3 +109,24 @@ class RegisterUserRq {
         "phoneNumber": phoneNumber,
       };
 }
+
+class ChangePasswordRq {
+  String oldPassword;
+  String newPassword;
+
+  ChangePasswordRq({
+    required this.oldPassword,
+    required this.newPassword,
+  });
+
+  factory ChangePasswordRq.fromJson(Map<String, dynamic> json) =>
+      ChangePasswordRq(
+        oldPassword: json["oldPassword"],
+        newPassword: json["newPassword"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "oldPassword": oldPassword,
+        "newPassword": newPassword,
+      };
+}

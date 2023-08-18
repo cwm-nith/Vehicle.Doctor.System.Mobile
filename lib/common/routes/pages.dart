@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vehicle_doctor_mobile/features/Welcome/index.dart';
+import 'package:vehicle_doctor_mobile/features/change_password/index.dart';
 import 'package:vehicle_doctor_mobile/features/landing/index.dart';
 import 'package:vehicle_doctor_mobile/features/profile_detail/index.dart';
 import 'package:vehicle_doctor_mobile/features/register/index.dart';
@@ -34,9 +35,15 @@ class AppPages {
       binding: LandingBinding(),
     ),
     GetPage(
-        name: AppRoutes.profileDetail,
-        page: () => const ProfileDetailPage(),
-        binding: ProfileDetailBinding()),
+      name: AppRoutes.profileDetail,
+      page: () => const ProfileDetailPage(),
+      binding: ProfileDetailBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.changePassword,
+      page: () => const ChangePasswordPage(),
+      binding: ChangePasswordBinding(),
+    )
     /*
     // GetPage(
     //   name: AppRoutes.Application,

@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:vehicle_doctor_mobile/common/apis/apis.dart';
 import 'package:vehicle_doctor_mobile/common/routes/routes.dart';
 import 'package:vehicle_doctor_mobile/common/store/store.dart';
-import 'package:vehicle_doctor_mobile/common/utils/print.dart';
 import 'package:vehicle_doctor_mobile/features/signin/index.dart';
 
 class SigninController extends GetxController {
@@ -25,11 +24,17 @@ class SigninController extends GetxController {
       phoneNumber: phoneNumberTextController.text,
       password: passwordTextController.text,
     );
-    myPrint(rq.toJson());
     var user = await UserAPI.login(params: rq);
     state.user.value = user;
     UserStore.to.saveProfile(state.user.value);
     EasyLoading.dismiss();
-    Get.toNamed(AppRoutes.landing);
+    Get.offAllNamed(AppRoutes.landing);
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    phoneNumberTextController.dispose();
+    passwordTextController.dispose();
   }
 }
