@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:vehicle_doctor_mobile/common/entities/entities.dart';
 import 'package:vehicle_doctor_mobile/common/utils/print.dart';
 import 'package:vehicle_doctor_mobile/common/values/colors.dart';
 import 'package:vehicle_doctor_mobile/common/widgets/widgets.dart';
@@ -10,10 +11,11 @@ class SigninPage extends GetView<SigninController> {
   const SigninPage({super.key});
 
   Widget _inputField({
-    TextEditingController? controller,
+    TextEditingController? textEditingController,
     String? text,
     TextInputType keyboardType = TextInputType.text,
     bool isPassword = false,
+    bool isPhoneNumber = false,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,12 +28,51 @@ class SigninPage extends GetView<SigninController> {
             color: AppColors.primaryText.withOpacity(0.8),
           ),
         ),
-        inputTextEdit(
-          keyboardType: keyboardType,
-          hintText: text ?? "Name",
-          controller: controller,
-          isPassword: isPassword,
-          bgColor: AppColors.primaryElement,
+        Row(
+          children: [
+            ...[
+              isPhoneNumber
+                  ? Obx(
+                      () => PhoneCodeDropDown<Country>(
+                          items: controller.state.countryCodes
+                              .map(
+                                (item) => DropdownMenuItem(
+                                  value: item,
+                                  child: Text(
+                                    item.dialCode,
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                      color: AppColors.primaryText,
+                                    ),
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                          selectedItems:
+                              controller.state.countryCodeSelected.value,
+                          onChanged: (val) {
+                            controller.state.countryCodeSelected.value = val;
+                          },
+                          searchMatchFn: (item, searchVal) {
+                            return (item.value?.code
+                                        .toLowerCase()
+                                        .contains(searchVal.toLowerCase()) ??
+                                    false) ||
+                                (item.value?.name.contains(searchVal) ?? false);
+                          }),
+                    )
+                  : Container(),
+            ],
+            Expanded(
+              child: inputTextEdit(
+                keyboardType: keyboardType,
+                hintText: text ?? "Name",
+                controller: textEditingController,
+                isPassword: isPassword,
+                bgColor: AppColors.primaryElement,
+              ),
+            ),
+          ],
         ),
       ],
     );
@@ -67,14 +108,17 @@ class SigninPage extends GetView<SigninController> {
                       ),
                     ),
                     _inputField(
-                        controller: controller.phoneNumberTextController,
-                        text: "Phone Number",
-                        keyboardType: const TextInputType.numberWithOptions()),
+                      textEditingController:
+                          controller.phoneNumberTextController,
+                      text: "Phone Number",
+                      keyboardType: const TextInputType.numberWithOptions(),
+                      isPhoneNumber: true,
+                    ),
                     SizedBox(
                       height: 10.h,
                     ),
                     _inputField(
-                      controller: controller.passwordTextController,
+                      textEditingController: controller.passwordTextController,
                       text: "Password",
                       isPassword: true,
                     ),

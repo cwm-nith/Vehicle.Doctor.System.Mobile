@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:vehicle_doctor_mobile/common/entities/entities.dart';
 import 'package:vehicle_doctor_mobile/common/values/values.dart';
 import 'package:vehicle_doctor_mobile/common/widgets/widgets.dart';
 import 'package:vehicle_doctor_mobile/features/register/index.dart';
@@ -8,9 +9,10 @@ import 'package:vehicle_doctor_mobile/features/register/index.dart';
 class RegisterPage extends GetView<RegisterController> {
   const RegisterPage({super.key});
   Widget _inputField({
-    TextEditingController? controller,
+    TextEditingController? editingController,
     String? text,
     bool isPassword = false,
+    bool isPhoneNumber = false,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,11 +25,50 @@ class RegisterPage extends GetView<RegisterController> {
             color: AppColors.primaryText.withOpacity(0.8),
           ),
         ),
-        inputTextEdit(
-          hintText: text ?? "Name",
-          controller: controller,
-          isPassword: isPassword,
-          bgColor: AppColors.primaryElement,
+        Row(
+          children: [
+            ...[
+              isPhoneNumber
+                  ? Obx(
+                      () => PhoneCodeDropDown<Country>(
+                          items: controller.state.countryCodes
+                              .map(
+                                (item) => DropdownMenuItem(
+                                  value: item,
+                                  child: Text(
+                                    item.dialCode,
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                      color: AppColors.primaryText,
+                                    ),
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                          selectedItems:
+                              controller.state.countryCodeSelected.value,
+                          onChanged: (val) {
+                            controller.state.countryCodeSelected.value = val;
+                          },
+                          searchMatchFn: (item, searchVal) {
+                            return (item.value?.code
+                                        .toLowerCase()
+                                        .contains(searchVal.toLowerCase()) ??
+                                    false) ||
+                                (item.value?.name.contains(searchVal) ?? false);
+                          }),
+                    )
+                  : Container(),
+            ],
+            Expanded(
+              child: inputTextEdit(
+                hintText: text ?? "Name",
+                controller: editingController,
+                isPassword: isPassword,
+                bgColor: AppColors.primaryElement,
+              ),
+            ),
+          ],
         ),
       ],
     );
@@ -66,28 +107,29 @@ class RegisterPage extends GetView<RegisterController> {
                       height: 50.h,
                     ),
                     _inputField(
-                      controller: controller.nameTextController,
+                      editingController: controller.nameTextController,
                       text: "Name",
                     ),
                     SizedBox(
                       height: 10.h,
                     ),
                     _inputField(
-                      controller: controller.usernameTextController,
+                      editingController: controller.usernameTextController,
                       text: "Username",
                     ),
                     SizedBox(
                       height: 10.h,
                     ),
                     _inputField(
-                      controller: controller.phoneNumberTextController,
+                      editingController: controller.phoneNumberTextController,
                       text: "Phone Number",
+                      isPhoneNumber: true,
                     ),
                     SizedBox(
                       height: 10.h,
                     ),
                     _inputField(
-                      controller: controller.passwordTextController,
+                      editingController: controller.passwordTextController,
                       text: "Password",
                       isPassword: true,
                     ),
@@ -95,7 +137,8 @@ class RegisterPage extends GetView<RegisterController> {
                       height: 10.h,
                     ),
                     _inputField(
-                      controller: controller.confirmPasswordTextController,
+                      editingController:
+                          controller.confirmPasswordTextController,
                       text: "Confirm Password",
                       isPassword: true,
                     ),
