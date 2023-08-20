@@ -26,10 +26,24 @@ class RegisterController extends GetxController {
 
   Future registerUser() async {
     EasyLoading.show(status: 'loading...', dismissOnTap: false);
+    var phNumber = phoneNumberTextController.text;
+    var firstPhNumber = int.parse(phNumber[0]);
+    var dialCode = state.countryCodeSelected.value?.dialCode.substring(1);
+    if (dialCode == null) {
+      MyDialog.error(text: "Please select dial code!");
+      EasyLoading.dismiss();
+      return;
+    }
+
+    if (firstPhNumber == 0) {
+      phNumber = "$dialCode${phNumber.substring(1)}";
+    } else {
+      phNumber = "$dialCode$phNumber";
+    }
     var body = RegisterUserRq(
       name: nameTextController.text,
       password: passwordTextController.text,
-      phoneNumber: phoneNumberTextController.text,
+      phoneNumber: phNumber,
       username: usernameTextController.text,
     );
 

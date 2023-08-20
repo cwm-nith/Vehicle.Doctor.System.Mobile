@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:vehicle_doctor_mobile/common/apis/apis.dart';
 import 'package:vehicle_doctor_mobile/common/routes/routes.dart';
 import 'package:vehicle_doctor_mobile/common/store/store.dart';
+import 'package:vehicle_doctor_mobile/common/widgets/widgets.dart';
 import 'package:vehicle_doctor_mobile/features/signin/index.dart';
 
 class SigninController extends GetxController {
@@ -20,8 +21,21 @@ class SigninController extends GetxController {
 
   Future signin() async {
     EasyLoading.show(status: 'loading...', dismissOnTap: false);
+    var phNumber = phoneNumberTextController.text;
+    var firstPhNumber = int.parse(phNumber[0]);
+    var dialCode = state.countryCodeSelected.value?.dialCode.substring(1);
+    if (dialCode == null) {
+      MyDialog.error(text: "Please select dial code!");
+      EasyLoading.dismiss();
+      return;
+    }
+    if (firstPhNumber == 0) {
+      phNumber = "$dialCode${phNumber.substring(1)}";
+    } else {
+      phNumber = "$dialCode$phNumber";
+    }
     var rq = SigninRq(
-      phoneNumber: phoneNumberTextController.text,
+      phoneNumber: phNumber,
       password: passwordTextController.text,
     );
     var user = await UserAPI.login(params: rq);

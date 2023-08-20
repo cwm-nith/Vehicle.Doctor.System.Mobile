@@ -41,8 +41,8 @@ class PhoneCodeDropDown<TItem> extends StatelessWidget {
           width: 70,
         ),
         dropdownStyleData: DropdownStyleData(
-          maxHeight: 200,
-          width: 200,
+          maxHeight: 400,
+          width: 100,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(14),
             color: AppColors.primaryBackground,
