@@ -143,109 +143,112 @@ class ProfileDetailPage extends GetView<ProfileDetailController> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: GestureDetector(
-          onTap: () {
-            FocusScope.of(context).unfocus();
-          },
-          child: Obx(
-            () => Container(
-              padding: EdgeInsets.all(20.w),
-              width: 360.w,
-              height: 780.h,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(20.w),
-                  topLeft: Radius.circular(20.w),
+      body: Container(
+        color: AppColors.primaryElement.withOpacity(0.3),
+        child: SingleChildScrollView(
+          child: GestureDetector(
+            onTap: () {
+              FocusScope.of(context).unfocus();
+            },
+            child: Obx(
+              () => Container(
+                padding: EdgeInsets.all(20.w),
+                width: 360.w,
+                height: 780.h,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(20.w),
+                    topLeft: Radius.circular(20.w),
+                  ),
+                  color: AppColors.primaryBackground,
                 ),
-                color: AppColors.primaryBackground,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildProfileImage(context),
-                  SizedBox(
-                    height: 30.h,
-                  ),
-                  _buildFieldDetail(
-                    context,
-                    icon: Icons.card_membership_rounded,
-                    label: "App Id",
-                    text: controller.state.user.value.id.toString(),
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  _buildFieldDetail(
-                    context,
-                    icon: Icons.person_outlined,
-                    label: "Name",
-                    text: controller.state.user.value.name,
-                    editable: true,
-                    controller: controller.nameTextController,
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  _buildFieldDetail(
-                    context,
-                    icon: Icons.phone_iphone_rounded,
-                    label: "Phone Number",
-                    text: controller.state.user.value.phoneNumber,
-                    editable: true,
-                    controller: controller.phoneNumberTextController,
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  _buildFieldDetail(
-                    context,
-                    icon: Icons.verified_user,
-                    label: "Username",
-                    text: controller.state.user.value.username,
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  _buildFieldDetail(
-                    context,
-                    icon: Icons.date_range_rounded,
-                    label: "Created At",
-                    text: controller.state.user.value.createdAt != null
-                        ? dateTimeFormated(
-                            controller.state.user.value.createdAt!,
-                          )
-                        : "",
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  _buildFieldDetail(
-                    context,
-                    icon: Icons.login_outlined,
-                    label: "Last Login",
-                    text: controller.state.user.value.lastLogin != null
-                        ? dateTimeFormated(
-                            controller.state.user.value.lastLogin!,
-                            formatWithTime: true,
-                          )
-                        : "",
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      btnFlatButtonWidget(
-                        onPressed: () async {
-                          await controller.updateProfile();
-                        },
-                        title: "Save Changes",
-                      ),
-                    ],
-                  ),
-                ],
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildProfileImage(context),
+                    SizedBox(
+                      height: 30.h,
+                    ),
+                    _buildFieldDetail(
+                      context,
+                      icon: Icons.card_membership_rounded,
+                      label: "App Id",
+                      text: controller.state.user.value.id.toString(),
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    _buildFieldDetail(
+                      context,
+                      icon: Icons.person_outlined,
+                      label: "Name",
+                      text: controller.state.user.value.name,
+                      editable: true,
+                      controller: controller.nameTextController,
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    _buildFieldDetail(
+                      context,
+                      icon: Icons.phone_iphone_rounded,
+                      label: "Phone Number",
+                      text: controller.state.user.value.phoneNumber,
+                      editable: true,
+                      controller: controller.phoneNumberTextController,
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    _buildFieldDetail(
+                      context,
+                      icon: Icons.verified_user,
+                      label: "Username",
+                      text: controller.state.user.value.username,
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    _buildFieldDetail(
+                      context,
+                      icon: Icons.date_range_rounded,
+                      label: "Created At",
+                      text: controller.state.user.value.createdAt != null
+                          ? dateTimeFormated(
+                              controller.state.user.value.createdAt!,
+                            )
+                          : "",
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    _buildFieldDetail(
+                      context,
+                      icon: Icons.login_outlined,
+                      label: "Last Login",
+                      text: controller.state.user.value.lastLogin != null
+                          ? dateTimeFormated(
+                              controller.state.user.value.lastLogin!,
+                              formatWithTime: true,
+                            )
+                          : "",
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        btnFlatButtonWidget(
+                          onPressed: () async {
+                            await controller.updateProfile();
+                          },
+                          title: "Save Changes",
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

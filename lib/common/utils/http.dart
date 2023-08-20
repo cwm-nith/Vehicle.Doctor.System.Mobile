@@ -33,18 +33,10 @@ class HttpUtil {
 
     dio = Dio(options);
 
-    // (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
-    //   final client = HttpClient();
-    //   client.badCertificateCallback =
-    //       (X509Certificate cert, String host, int port) => true;
-    //   return client;
-    // };
-
-    // CookieJar cookieJar = CookieJar();
-    // dio.interceptors.add(CookieManager(cookieJar));
     dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) {
         myPrint("Request body => ${options.data.toString()}");
+        myPrint("Request Uri => ${options.baseUrl}${options.path}");
         return handler.next(options); //continue
       },
       onResponse: (response, handler) {
@@ -88,7 +80,7 @@ class HttpUtil {
   }
 
   ErrorEntity createErrorEntity(DioException error) {
-    if (error.response?.data != null) {
+    if (error.response?.data != null && error.response?.data != "") {
       var errorBase = ErrorBase.fromJson(error.response?.data);
       if (errorBase.code == null) {
         var validationModelError =
@@ -184,7 +176,7 @@ class HttpUtil {
     var response = await dio.get(
       path,
       queryParameters: queryParameters,
-      options: options,
+      options: requestOptions,
       cancelToken: cancelToken,
     );
     return response.data;

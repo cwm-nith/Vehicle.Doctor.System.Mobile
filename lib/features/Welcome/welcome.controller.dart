@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:vehicle_doctor_mobile/common/routes/routes.dart';
 import 'package:vehicle_doctor_mobile/common/utils/print.dart';
-import 'package:vehicle_doctor_mobile/features/Welcome/welcome.state.dart';
+import 'package:vehicle_doctor_mobile/features/welcome/welcome.state.dart';
 
 class WelcomeController extends GetxController {
   WelcomeController();

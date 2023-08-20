@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:vehicle_doctor_mobile/common/values/colors.dart';
-import 'package:vehicle_doctor_mobile/features/Welcome/index.dart';
+import 'package:vehicle_doctor_mobile/features/welcome/index.dart';
 
 class WelcomePage extends GetView<WelcomeController> {
   const WelcomePage({super.key});

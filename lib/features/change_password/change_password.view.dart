@@ -23,6 +23,7 @@ class ChangePasswordPage extends GetView<ChangePasswordController> {
           style: TextStyle(
             fontSize: 16.sp,
             fontWeight: FontWeight.bold,
+            color: AppColors.primaryText.withOpacity(0.9),
           ),
         ),
         inputTextEdit(
@@ -30,6 +31,7 @@ class ChangePasswordPage extends GetView<ChangePasswordController> {
           hintText: text ?? "Name",
           controller: controller,
           isPassword: isPassword,
+          bgColor: AppColors.primaryElement,
         ),
       ],
     );
@@ -38,7 +40,7 @@ class ChangePasswordPage extends GetView<ChangePasswordController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.secondaryElementText,
+      backgroundColor: AppColors.primaryBackground,
       appBar: transparentAppBar(
         title: SizedBox(
           width: 200.w,
@@ -50,66 +52,69 @@ class ChangePasswordPage extends GetView<ChangePasswordController> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: GestureDetector(
-          onTap: () {
-            FocusScope.of(context).unfocus();
-          },
-          child: Container(
-            padding: EdgeInsets.all(20.w),
-            width: 360.w,
-            height: 780.h,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(20.w),
-                topLeft: Radius.circular(20.w),
+      body: Container(
+        color: AppColors.primaryElement.withOpacity(0.3),
+        child: SingleChildScrollView(
+          child: GestureDetector(
+            onTap: () {
+              FocusScope.of(context).unfocus();
+            },
+            child: Container(
+              padding: EdgeInsets.all(20.w),
+              width: 360.w,
+              height: 780.h,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(20.w),
+                  topLeft: Radius.circular(20.w),
+                ),
+                color: AppColors.primaryBackground,
               ),
-              color: AppColors.primaryBackground,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 20.h,
-                ),
-                _inputField(
-                  controller: controller.oldPasswordTextController,
-                  text: "Old Password",
-                  isPassword: true,
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                _inputField(
-                  controller: controller.newPasswordTextController,
-                  text: "Password",
-                  isPassword: true,
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                _inputField(
-                  controller: controller.confirmPasswordTextController,
-                  text: "Confirm Password",
-                  isPassword: true,
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    btnFlatButtonWidget(
-                      width: 150.w,
-                      onPressed: () async {
-                        await controller.changePassword();
-                        myPrint("Change password");
-                      },
-                      title: "Change Password",
-                    ),
-                  ],
-                ),
-              ],
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  _inputField(
+                    controller: controller.oldPasswordTextController,
+                    text: "Old Password",
+                    isPassword: true,
+                  ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  _inputField(
+                    controller: controller.newPasswordTextController,
+                    text: "Password",
+                    isPassword: true,
+                  ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  _inputField(
+                    controller: controller.confirmPasswordTextController,
+                    text: "Confirm Password",
+                    isPassword: true,
+                  ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      btnFlatButtonWidget(
+                        width: 150.w,
+                        onPressed: () async {
+                          await controller.changePassword();
+                          myPrint("Change password");
+                        },
+                        title: "Change Password",
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
