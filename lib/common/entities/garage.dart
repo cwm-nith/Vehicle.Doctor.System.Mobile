@@ -1,7 +1,7 @@
 import 'package:vehicle_doctor_mobile/common/entities/entities.dart';
 
 class GaragePageResponse extends Pagination {
-  final List<Garage>? items;
+  List<Garage>? items = List<Garage>.empty();
   GaragePageResponse({
     super.isEmpty,
     super.isNotEmpty,

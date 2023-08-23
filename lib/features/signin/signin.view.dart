@@ -32,8 +32,10 @@ class SigninPage extends GetView<SigninController> {
           children: [
             ...[
               isPhoneNumber
-                  ? Obx(
-                      () => PhoneCodeDropDown<Country>(
+                  ? Padding(
+                      padding: EdgeInsets.only(top: 8.h),
+                      child: Obx(
+                        () => PhoneCodeDropDown<Country>(
                           items: controller.state.countryCodes
                               .map(
                                 (item) => DropdownMenuItem(
@@ -59,7 +61,9 @@ class SigninPage extends GetView<SigninController> {
                                         .contains(searchVal.toLowerCase()) ??
                                     false) ||
                                 (item.value?.name.contains(searchVal) ?? false);
-                          }),
+                          },
+                        ),
+                      ),
                     )
                   : Container(),
             ],

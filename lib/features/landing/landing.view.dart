@@ -33,7 +33,9 @@ class LandingPage extends GetView<LandingController> {
         child: BottomNavigationBar(
           showUnselectedLabels: true,
           showSelectedLabels: true,
-          onTap: landingPageController.changeTabIndex,
+          onTap: (index) async {
+            await landingPageController.changeTabIndex(index);
+          },
           currentIndex: landingPageController.state.tabIndex.value,
           backgroundColor: AppColors.transparent,
           unselectedItemColor: AppColors.primaryText.withOpacity(0.8),

@@ -10,6 +10,33 @@ import 'package:vehicle_doctor_mobile/features/landing/index.dart';
 class Profile extends StatelessWidget {
   final LandingController controller;
   const Profile({super.key, required this.controller});
+
+  Widget _buildSection({
+    required BuildContext context,
+    required Function() onTap,
+    required List<Widget> children,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.only(
+          left: 5.w,
+          top: 5.h,
+          bottom: 5.h,
+        ),
+        decoration: BoxDecoration(
+          color: AppColors.primaryElement.withOpacity(0.5),
+          borderRadius: BorderRadius.circular(10.w),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: children,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +44,7 @@ class Profile extends StatelessWidget {
       body: Obx(
         () => SafeArea(
           child: Padding(
-            padding: EdgeInsets.all(20.w),
+            padding: EdgeInsets.all(10.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -85,94 +112,107 @@ class Profile extends StatelessWidget {
                 SizedBox(
                   height: 30.h,
                 ),
-                GestureDetector(
-                  onTap: () {
-                    controller.goProfileDetail();
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(
-                        Icons.person_outlined,
-                        size: 25.0.w,
-                        color: AppColors.secondaryElementText,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Profile Details",
-                            style: TextStyle(
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.primaryText.withOpacity(0.8),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5.h,
-                          ),
-                          Text(
-                            "View & Edit Details",
-                            style: TextStyle(
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.primaryText.withOpacity(0.7),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        width: 90.w,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 8.0.w),
-                        child: Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          size: 20.0.w,
+                GridView.count(
+                  shrinkWrap: true,
+                  primary: false,
+                  childAspectRatio: (1 / .4),
+                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 5,
+                  crossAxisCount: 2,
+                  children: [
+                    _buildSection(
+                      context: context,
+                      onTap: () {
+                        controller.goProfileDetail();
+                      },
+                      children: [
+                        Icon(
+                          Icons.person_outlined,
+                          size: 25.0.w,
                           color: AppColors.secondaryElementText,
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 30.h,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    controller.goChangeProfile();
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(
-                        Icons.password_rounded,
-                        size: 25.0.w,
-                        color: AppColors.secondaryElementText,
-                      ),
-                      Text(
-                        "Change Password",
-                        style: TextStyle(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.primaryText.withOpacity(0.8),
+                        SizedBox(
+                          width: 10.w,
                         ),
-                      ),
-                      SizedBox(
-                        width: 90.w,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 8.0.w),
-                        child: Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          size: 20.0.w,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Profile Details",
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.primaryText.withOpacity(0.8),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 5.h,
+                            ),
+                            Text(
+                              "View & Edit Details",
+                              style: TextStyle(
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.primaryText.withOpacity(0.7),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    _buildSection(
+                      context: context,
+                      onTap: () {
+                        controller.goChangeProfile();
+                      },
+                      children: [
+                        Icon(
+                          Icons.password_rounded,
+                          size: 25.0.w,
                           color: AppColors.secondaryElementText,
                         ),
-                      ),
-                    ],
-                  ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        Text(
+                          "Change Password",
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.primaryText.withOpacity(0.8),
+                          ),
+                        ),
+                      ],
+                    ),
+                    _buildSection(
+                      context: context,
+                      onTap: () {
+                        controller.goProfileDetail();
+                      },
+                      children: [
+                        SizedBox(
+                          width: 30.w,
+                          height: 30.h,
+                          child: Image.asset(
+                            'assets/icons/garage-icon.png',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        Text(
+                          "Garages",
+                          style: TextStyle(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.primaryText.withOpacity(0.8),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
                 Divider(
                   height: 40.h,
@@ -191,61 +231,72 @@ class Profile extends StatelessWidget {
                 SizedBox(
                   height: 30.h,
                 ),
-                GestureDetector(
-                  onTap: () {
-                    myPrint("Notification");
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(
-                        Icons.notifications_none_outlined,
-                        size: 25.0.w,
-                        color: AppColors.secondaryElementText,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Push Notifications",
-                            style: TextStyle(
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.primaryText.withOpacity(0.8),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5.h,
-                          ),
-                          Text(
-                            controller.state.pushNotification.value
-                                ? "On"
-                                : "Off",
-                            style: TextStyle(
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.primaryText.withOpacity(0.7),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        width: 60.w,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 8.0.w),
-                        child: Switch(
-                          activeColor: AppColors.secondaryElementText,
-                          inactiveTrackColor:
-                              AppColors.primaryText.withOpacity(0.5),
-                          value: controller.state.pushNotification.value,
-                          onChanged: (value) {
-                            controller.updatePushNotificationSetting(value);
-                          },
+                Container(
+                  padding: EdgeInsets.only(
+                    left: 5.w,
+                    top: 5.h,
+                    bottom: 5.h,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryElement.withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(10.w),
+                  ),
+                  child: GestureDetector(
+                    onTap: () {
+                      myPrint("Notification");
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Icon(
+                          Icons.notifications_none_outlined,
+                          size: 25.0.w,
+                          color: AppColors.secondaryElementText,
                         ),
-                      ),
-                    ],
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Push Notifications",
+                              style: TextStyle(
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.primaryText.withOpacity(0.8),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 5.h,
+                            ),
+                            Text(
+                              controller.state.pushNotification.value
+                                  ? "On"
+                                  : "Off",
+                              style: TextStyle(
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.primaryText.withOpacity(0.7),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 60.w,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 8.0.w),
+                          child: Switch(
+                            activeColor: AppColors.secondaryElementText,
+                            inactiveTrackColor:
+                                AppColors.primaryText.withOpacity(0.5),
+                            value: controller.state.pushNotification.value,
+                            onChanged: (value) {
+                              controller.updatePushNotificationSetting(value);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Divider(
