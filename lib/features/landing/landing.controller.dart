@@ -36,6 +36,10 @@ class LandingController extends GetxController {
     Get.toNamed(AppRoutes.profileDetail);
   }
 
+  void goGarageMain() {
+    Get.toNamed(AppRoutes.garageMain);
+  }
+
   void goAccount() {
     Get.toNamed(AppRoutes.account);
   }

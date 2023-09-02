@@ -64,12 +64,13 @@ Widget inputTextAreaEdit({
   double marginTop = 15,
   bool autofocus = false,
   ValueChanged<String>? onchanged,
+  Color? bgColor,
 }) {
   return Container(
-    height: 100.h,
+    height: 150.h,
     margin: EdgeInsets.only(top: marginTop.h),
-    decoration: const BoxDecoration(
-      color: AppColors.secondaryElement,
+    decoration: BoxDecoration(
+      color: bgColor,
       borderRadius: Radii.k6pxRadius,
     ),
     child: TextField(
@@ -87,7 +88,7 @@ Widget inputTextAreaEdit({
         fontWeight: FontWeight.w400,
         fontSize: 16.sp,
       ),
-      maxLines: 3,
+      maxLines: 6,
       autocorrect: false,
       obscureText: isPassword,
       onChanged: onchanged,

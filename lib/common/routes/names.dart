@@ -1,6 +1,9 @@
 class AppRoutes {
   static const initial = '/';
   static const account = '/account';
+  static const garageMain = '/garage_main';
+  static const createGarage = '/create_garage';
+  static const searchLocation = '/search_location';
   static const landing = '/landing';
   static const signIn = '/sign_in';
   static const emailLogin = '/email_login';

@@ -8,3 +8,4 @@ export 'country.dart';
 export 'error_base.dart';
 export 'garage.dart';
 export 'pagination.dart';
+export "google_place.dart";

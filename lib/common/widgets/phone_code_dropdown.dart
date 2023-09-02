@@ -11,7 +11,7 @@ class PhoneCodeDropDown<TItem> extends StatelessWidget {
     required this.items,
     required this.selectedItems,
     required this.onChanged,
-    this.searchMatchFn,
+    required this.searchMatchFn,
   });
 
   final List<DropdownMenuItem<TItem>> items;

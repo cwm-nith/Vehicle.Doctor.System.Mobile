@@ -1,16 +1,17 @@
 import 'package:get/get.dart';
 import 'package:vehicle_doctor_mobile/common/entities/entities.dart';
 import 'package:vehicle_doctor_mobile/common/services/services.dart';
+import 'package:vehicle_doctor_mobile/common/utils/print.dart';
 import 'package:vehicle_doctor_mobile/features/account/index.dart';
 
 class AccountController extends GetxController {
   AccountController();
-  final appTitle = "Vehicle Doctor";
   final state = AccountState();
 
   @override
-  Future onInit() async {
-    super.onInit();
+  Future onReady() async {
+    super.onReady();
+    myPrint("Account Page");
     await getGaragesByUser();
   }
 

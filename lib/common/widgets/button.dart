@@ -14,6 +14,7 @@ Widget btnFlatButtonWidget({
   double fontSize = 16,
   String fontName = "Montserrat",
   FontWeight fontWeight = FontWeight.w400,
+  bool isDisable = false,
 }) {
   return SizedBox(
     width: width.w,
@@ -35,6 +36,7 @@ Widget btnFlatButtonWidget({
           },
         ),
         backgroundColor: MaterialStateProperty.resolveWith((states) {
+          if (isDisable) return bgColor;
           if (states.contains(MaterialState.pressed)) {
             return Colors.blue[200];
           }

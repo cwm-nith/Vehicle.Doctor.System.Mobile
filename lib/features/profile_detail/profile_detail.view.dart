@@ -21,7 +21,7 @@ class ProfileDetailPage extends GetView<ProfileDetailController> {
       width: MediaQuery.of(context).size.width,
       height: 70.h,
       decoration: BoxDecoration(
-        color: AppColors.primaryElement,
+        color: AppColors.primaryElement.withOpacity(0.6),
         borderRadius: BorderRadius.circular(10.w),
       ),
       child: Row(

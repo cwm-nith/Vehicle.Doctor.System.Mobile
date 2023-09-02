@@ -53,7 +53,6 @@ class Profile extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    myPrint("Going to account");
                     controller.goAccount();
                   },
                   child: Container(
@@ -188,7 +187,7 @@ class Profile extends StatelessWidget {
                     _buildSection(
                       context: context,
                       onTap: () {
-                        controller.goProfileDetail();
+                        controller.goGarageMain();
                       },
                       children: [
                         SizedBox(
@@ -219,7 +218,7 @@ class Profile extends StatelessWidget {
                   thickness: 1,
                 ),
                 SizedBox(
-                  height: 30.h,
+                  height: 10.h,
                 ),
                 Text(
                   "SETTINGS",
