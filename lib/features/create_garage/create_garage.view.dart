@@ -35,7 +35,6 @@ class CreateGaragePage extends GetView<CreateGarageController> {
       itemCount: list.length,
       itemBuilder: (BuildContext context, int index) {
         return Container(
-          height: 20.h,
           decoration: BoxDecoration(
             color: AppColors.primaryElement,
             borderRadius: BorderRadius.circular(10.w),
@@ -44,11 +43,19 @@ class CreateGaragePage extends GetView<CreateGarageController> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                list[index],
-                style: TextStyle(
-                  color: AppColors.secondaryElement,
-                  fontSize: 12.sp,
+              Container(
+                padding: EdgeInsets.only(
+                  top: 1.h,
+                  left: 5.w,
+                  right: 5.w,
+                ),
+                width: MediaQuery.of(context).size.width * 0.35,
+                child: Text(
+                  list[index],
+                  style: TextStyle(
+                    color: AppColors.secondaryElement,
+                    fontSize: 13.sp,
+                  ),
                 ),
               ),
               SizedBox(
@@ -292,7 +299,10 @@ class CreateGaragePage extends GetView<CreateGarageController> {
               child: GoogleMap(
                 myLocationEnabled: true,
                 mapType: MapType.normal,
-                initialCameraPosition: controller.kGooglePlex,
+                initialCameraPosition: CameraPosition(
+                  target: controller.state.currentUserLocation.value,
+                  zoom: 14.4746,
+                ),
                 onMapCreated: (mapController) =>
                     controller.onMapCreated(mapController),
                 markers: {
@@ -369,7 +379,7 @@ class CreateGaragePage extends GetView<CreateGarageController> {
                   ? Padding(
                       padding: EdgeInsets.only(top: 10.h),
                       child: SizedBox(
-                        height: 80.h,
+                        height: 50.h,
                         child: _buildListViewContact(
                           controller.state.listPhoneNumbers,
                           onTap: (index, value) {
@@ -388,8 +398,11 @@ class CreateGaragePage extends GetView<CreateGarageController> {
             ),
             _inputField(
               text: "Telegram",
-              textEditingController: controller.addressTextController,
+              textEditingController: controller.ctTgTextController,
               icon: GestureDetector(
+                onTap: () {
+                  controller.updateTelegramsList();
+                },
                 child: Container(
                   margin: EdgeInsets.only(top: 15.h),
                   child: Icon(
@@ -405,7 +418,7 @@ class CreateGaragePage extends GetView<CreateGarageController> {
                   ? Padding(
                       padding: EdgeInsets.only(top: 10.h),
                       child: SizedBox(
-                        height: 80.h,
+                        height: 50.h,
                         child: _buildListViewContact(
                           controller.state.listTelegrams,
                           onTap: (index, value) {
@@ -424,8 +437,11 @@ class CreateGaragePage extends GetView<CreateGarageController> {
             ),
             _inputField(
               text: "WhatsApp",
-              textEditingController: controller.addressTextController,
+              textEditingController: controller.ctWaTextController,
               icon: GestureDetector(
+                onTap: () {
+                  controller.updateWhatsAppsList();
+                },
                 child: Container(
                   margin: EdgeInsets.only(top: 15.h),
                   child: Icon(
@@ -441,7 +457,7 @@ class CreateGaragePage extends GetView<CreateGarageController> {
                   ? Padding(
                       padding: EdgeInsets.only(top: 10.h),
                       child: SizedBox(
-                        height: 80.h,
+                        height: 50.h,
                         child: _buildListViewContact(
                           controller.state.listWhatsApps,
                           onTap: (index, value) {
@@ -460,8 +476,11 @@ class CreateGaragePage extends GetView<CreateGarageController> {
             ),
             _inputField(
               text: "WeChat",
-              textEditingController: controller.addressTextController,
+              textEditingController: controller.ctWcTextController,
               icon: GestureDetector(
+                onTap: () {
+                  controller.updateWeChatsList();
+                },
                 child: Container(
                   margin: EdgeInsets.only(top: 15.h),
                   child: Icon(
@@ -477,7 +496,7 @@ class CreateGaragePage extends GetView<CreateGarageController> {
                   ? Padding(
                       padding: EdgeInsets.only(top: 10.h),
                       child: SizedBox(
-                        height: 80.h,
+                        height: 50.h,
                         child: _buildListViewContact(
                           controller.state.listWeChats,
                           onTap: (index, value) {

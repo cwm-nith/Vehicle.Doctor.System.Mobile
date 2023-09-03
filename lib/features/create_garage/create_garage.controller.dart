@@ -50,11 +50,6 @@ class CreateGarageController extends GetxController {
 
   GoogleMapController? mapController;
 
-  final CameraPosition kGooglePlex = const CameraPosition(
-    target: LatLng(11.5583, 104.9121),
-    zoom: 14.4746,
-  );
-
   Future<LatLng> getCurrentLocation() async {
     var location = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
