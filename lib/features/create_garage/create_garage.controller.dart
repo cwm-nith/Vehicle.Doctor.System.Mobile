@@ -41,6 +41,10 @@ class CreateGarageController extends GetxController {
   // WeChat
   final TextEditingController ctWcTextController = TextEditingController();
 
+  // Social Username
+  final TextEditingController socialUsernameTextController =
+      TextEditingController();
+
   bool get isHasBack => state.currentStep.value >= 1;
   bool get isNoBackAvailable => state.currentStep.value == 0;
 
@@ -93,9 +97,11 @@ class CreateGarageController extends GetxController {
     if (isRemove && index != null) {
       state.listPhoneNumbers.removeAt(index);
     } else {
-      var phoneNumber =
-          "${state.countryCodeSelected.value?.dialCode}${ctPhTextController.text}";
-      state.listPhoneNumbers.add(phoneNumber);
+      if (ctPhTextController.text.isNotEmpty) {
+        var phoneNumber =
+            "${state.countryCodeSelected.value?.dialCode}${ctPhTextController.text}";
+        state.listPhoneNumbers.add(phoneNumber);
+      }
       ctPhTextController.clear();
     }
   }
@@ -107,7 +113,9 @@ class CreateGarageController extends GetxController {
     if (isRemove && index != null) {
       state.listTelegrams.removeAt(index);
     } else {
-      state.listTelegrams.add(ctTgTextController.text);
+      if (ctTgTextController.text.isNotEmpty) {
+        state.listTelegrams.add(ctTgTextController.text);
+      }
       ctTgTextController.clear();
     }
   }
@@ -119,7 +127,9 @@ class CreateGarageController extends GetxController {
     if (isRemove && index != null) {
       state.listWhatsApps.removeAt(index);
     } else {
-      state.listWhatsApps.add(ctWaTextController.text);
+      if (ctWaTextController.text.isNotEmpty) {
+        state.listWhatsApps.add(ctWaTextController.text);
+      }
       ctWaTextController.clear();
     }
   }
@@ -131,8 +141,34 @@ class CreateGarageController extends GetxController {
     if (isRemove && index != null) {
       state.listWeChats.removeAt(index);
     } else {
-      state.listWeChats.add(ctWcTextController.text);
+      if (ctWcTextController.text.isNotEmpty) {
+        state.listWeChats.add(ctWcTextController.text);
+      }
       ctWcTextController.clear();
+    }
+  }
+
+  void updateSocialList({
+    bool isRemove = false,
+    int? index,
+  }) {
+    if (isRemove && index != null) {
+      state.listSocialUsernameList.removeAt(index);
+    } else {
+      if (socialUsernameTextController.text.isNotEmpty) {
+        state.listSocialUsernameList.add(
+          GarageSocialLinkCreate(
+            socialLink: GarageSocialLinks.userNameFormat(
+              baseUrl: state.socialTypeSelected.value?.baseUrl ?? "",
+              type: state.socialTypeSelected.value?.socialLinkType ?? 0,
+              username: socialUsernameTextController.text,
+            ),
+            socialLinkType: state.socialTypeSelected.value?.socialLinkType,
+          ),
+        );
+      }
+
+      socialUsernameTextController.clear();
     }
   }
 
@@ -144,12 +180,11 @@ class CreateGarageController extends GetxController {
     var des = descriptionTextController.text;
     var lat = state.currentUserLocation.value.latitude;
     var long = state.currentUserLocation.value.longitude;
-    // var socailType = state.socialTypeSelected.value?.socialLinkType;
-    // var socialLink = state.socialTypeSelected.value?.socialLink;
+    var socialLinks = state.listSocialUsernameList;
     var body = CreateGarage(
       address: addr,
       description: des,
-      garageSocialLinks: List.empty(),
+      garageSocialLinks: socialLinks,
       lat: lat,
       long: long,
       name: name,

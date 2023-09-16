@@ -20,6 +20,69 @@ class CreateGaragePage extends GetView<CreateGarageController> {
   //   );
   // }
 
+  Widget _buildListViewSocial(
+    List<GarageSocialLinkCreate> list, {
+    required void Function(int index, GarageSocialLinkCreate value) onTap,
+  }) {
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 1,
+        childAspectRatio: 1,
+        crossAxisSpacing: 5,
+        mainAxisExtent: 40,
+        mainAxisSpacing: 5,
+      ),
+      itemCount: list.length,
+      itemBuilder: (BuildContext context, int index) {
+        return Container(
+          decoration: BoxDecoration(
+            color: AppColors.primaryElement,
+            borderRadius: BorderRadius.circular(10.w),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: EdgeInsets.only(
+                  top: 1.h,
+                  left: 5.w,
+                  right: 5.w,
+                ),
+                width: MediaQuery.of(context).size.width * 0.7,
+                child: Text(
+                  list[index].socialLink ?? "",
+                  style: TextStyle(
+                    color: AppColors.secondaryElement,
+                    fontSize: 13.sp,
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 2.w,
+              ),
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    onTap(
+                      index,
+                      list[index],
+                    );
+                  },
+                  child: Icon(
+                    Icons.highlight_remove_sharp,
+                    color: AppColors.secondaryElement,
+                    size: 20.w,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   Widget _buildListViewContact(
     List<String> list, {
     required void Function(int index, String value) onTap,
@@ -593,13 +656,46 @@ class CreateGaragePage extends GetView<CreateGarageController> {
                 ),
                 Expanded(
                   child: _inputField(
-                    textEditingController: controller.ctPhTextController,
+                    textEditingController:
+                        controller.socialUsernameTextController,
                     text: "Username",
+                    icon: GestureDetector(
+                      onTap: () {
+                        controller.updateSocialList();
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(top: 15.h),
+                        child: Icon(
+                          Icons.add_circle_rounded,
+                          color: AppColors.secondaryElementText,
+                          size: 30.w,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],
             ),
           ),
+          ...[
+            controller.state.listSocialUsernameList.isNotEmpty
+                ? Padding(
+                    padding: EdgeInsets.only(top: 10.h),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.5,
+                      child: _buildListViewSocial(
+                        controller.state.listSocialUsernameList,
+                        onTap: (index, value) {
+                          controller.updateSocialList(
+                            isRemove: true,
+                            index: index,
+                          );
+                        },
+                      ),
+                    ),
+                  )
+                : Container(),
+          ],
         ],
       ),
     );

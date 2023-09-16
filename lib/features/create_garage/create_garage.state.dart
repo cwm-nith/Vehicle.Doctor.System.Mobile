@@ -18,4 +18,7 @@ class CreateGarageState {
   RxList<String> listTelegrams = RxList<String>();
   RxList<String> listWhatsApps = RxList<String>();
   RxList<String> listWeChats = RxList<String>();
+
+  RxList<GarageSocialLinkCreate> listSocialUsernameList =
+      RxList<GarageSocialLinkCreate>();
 }

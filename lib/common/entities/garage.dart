@@ -239,7 +239,7 @@ class CreateGarage {
             weChat == null ? [] : List<String>.from(weChat!.map((x) => x)),
         "garageSocialLinks": garageSocialLinks == null
             ? []
-            : List<String>.from(garageSocialLinks!.map((x) => x.toJson())),
+            : List<dynamic>.from(garageSocialLinks!.map((x) => x.toJson())),
       };
 }
 
@@ -297,6 +297,20 @@ class GarageSocialLinks {
         throw Exception('Invalid dial code: $type');
       },
     );
+  }
+
+  static String userNameFormat({
+    required String baseUrl,
+    required int type,
+    required String username,
+  }) {
+    switch (type) {
+      case 1:
+      case 7:
+        return "$baseUrl/@$username";
+      default:
+        return "$baseUrl/$username";
+    }
   }
 
   static final List<GarageSocialLinkView> _list = [
