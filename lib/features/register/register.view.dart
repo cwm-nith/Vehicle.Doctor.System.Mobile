@@ -30,7 +30,7 @@ class RegisterPage extends GetView<RegisterController> {
             ...[
               isPhoneNumber
                   ? Obx(
-                      () => PhoneCodeDropDown<Country>(
+                      () => DropDown<Country>(
                           items: controller.state.countryCodes
                               .map(
                                 (item) => DropdownMenuItem(

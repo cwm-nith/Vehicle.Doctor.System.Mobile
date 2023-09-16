@@ -58,7 +58,6 @@ class Garage {
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final int? updatedBy;
-  final List<GarageContact>? garageContacts;
 
   Garage({
     this.id,
@@ -73,7 +72,6 @@ class Garage {
     this.createdAt,
     this.updatedAt,
     this.updatedBy,
-    this.garageContacts,
   });
 
   factory Garage.fromJson(Map<String, dynamic> json) => Garage(
@@ -95,10 +93,6 @@ class Garage {
             ? null
             : DateTime.parse(json["updatedAt"]),
         updatedBy: json["updatedBy"],
-        garageContacts: json["garageContacts"] == null
-            ? []
-            : List<GarageContact>.from(
-                json["garageContacts"]!.map((x) => GarageContact.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -114,72 +108,12 @@ class Garage {
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
         "updatedBy": updatedBy,
-        "garageContacts": garageContacts == null
-            ? []
-            : List<dynamic>.from(garageContacts!.map((x) => x.toJson())),
-      };
-}
-
-class GarageContact {
-  final int? id;
-  final int? garageId;
-  final String? phoneNumber;
-  final String? telegram;
-  final String? whatsApp;
-  final String? weChat;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
-  final List<GarageSocialLink>? garageSocialLinks;
-
-  GarageContact({
-    this.id,
-    this.garageId,
-    this.phoneNumber,
-    this.telegram,
-    this.whatsApp,
-    this.weChat,
-    this.createdAt,
-    this.updatedAt,
-    this.garageSocialLinks,
-  });
-
-  factory GarageContact.fromJson(Map<String, dynamic> json) => GarageContact(
-        id: json["id"],
-        garageId: json["garageId"],
-        phoneNumber: json["phoneNumber"],
-        telegram: json["telegram"],
-        whatsApp: json["whatsApp"],
-        weChat: json["weChat"],
-        createdAt: json["createdAt"] == null
-            ? null
-            : DateTime.parse(json["createdAt"]),
-        updatedAt: json["updatedAt"] == null
-            ? null
-            : DateTime.parse(json["updatedAt"]),
-        garageSocialLinks: json["garageSocialLinks"] == null
-            ? []
-            : List<GarageSocialLink>.from(json["garageSocialLinks"]!
-                .map((x) => GarageSocialLink.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "garageId": garageId,
-        "phoneNumber": phoneNumber,
-        "telegram": telegram,
-        "whatsApp": whatsApp,
-        "weChat": weChat,
-        "createdAt": createdAt?.toIso8601String(),
-        "updatedAt": updatedAt?.toIso8601String(),
-        "garageSocialLinks": garageSocialLinks == null
-            ? []
-            : List<dynamic>.from(garageSocialLinks!.map((x) => x.toJson())),
       };
 }
 
 class GarageSocialLink {
   final int? id;
-  final int? garageContactId;
+  final int? garageId;
   final String? socialLink;
   final int? socialLinkType;
   final DateTime? createdAt;
@@ -187,7 +121,7 @@ class GarageSocialLink {
 
   GarageSocialLink({
     this.id,
-    this.garageContactId,
+    this.garageId,
     this.socialLink,
     this.socialLinkType,
     this.createdAt,
@@ -197,7 +131,7 @@ class GarageSocialLink {
   factory GarageSocialLink.fromJson(Map<String, dynamic> json) =>
       GarageSocialLink(
         id: json["id"],
-        garageContactId: json["garageContactId"],
+        garageId: json["garageId"],
         socialLink: json["socialLink"],
         socialLinkType: json["socialLinkType"],
         createdAt: json["createdAt"] == null
@@ -210,10 +144,196 @@ class GarageSocialLink {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "garageContactId": garageContactId,
+        "garageId": garageId,
         "socialLink": socialLink,
         "socialLinkType": socialLinkType,
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
       };
+}
+
+class GarageSocialLinkCreate {
+  final String? socialLink;
+  final int? socialLinkType;
+
+  GarageSocialLinkCreate({
+    this.socialLink,
+    this.socialLinkType,
+  });
+
+  factory GarageSocialLinkCreate.fromJson(Map<String, dynamic> json) =>
+      GarageSocialLinkCreate(
+        socialLink: json["socialLink"],
+        socialLinkType: json["socialLinkType"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "socialLink": socialLink,
+        "socialLinkType": socialLinkType,
+      };
+}
+
+class CreateGarage {
+  final String? name;
+  final String? address;
+  final double? lat;
+  final double? long;
+  final String? description;
+  final List<String>? phoneNumber;
+  final List<String>? telegram;
+  final List<String>? whatsApp;
+  final List<String>? weChat;
+  final List<GarageSocialLinkCreate>? garageSocialLinks;
+
+  CreateGarage({
+    this.name,
+    this.address,
+    this.lat,
+    this.long,
+    this.description,
+    this.phoneNumber,
+    this.telegram,
+    this.whatsApp,
+    this.weChat,
+    this.garageSocialLinks,
+  });
+
+  factory CreateGarage.fromJson(Map<String, dynamic> json) => CreateGarage(
+        name: json["name"],
+        address: json["address"],
+        lat: json["lat"],
+        long: json["long"],
+        description: json["description"],
+        phoneNumber: json["phoneNumber"] == null
+            ? []
+            : List<String>.from(json["phoneNumber"]!.map((x) => x)),
+        telegram: json["telegram"] == null
+            ? []
+            : List<String>.from(json["telegram"]!.map((x) => x)),
+        whatsApp: json["whatsApp"] == null
+            ? []
+            : List<String>.from(json["whatsApp"]!.map((x) => x)),
+        weChat: json["weChat"] == null
+            ? []
+            : List<String>.from(json["weChat"]!.map((x) => x)),
+        garageSocialLinks: json["garageSocialLinks"] == null
+            ? []
+            : List<GarageSocialLinkCreate>.from(json["garageSocialLinks"]!
+                .map((x) => GarageSocialLinkCreate.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "address": address,
+        "lat": lat,
+        "long": long,
+        "description": description,
+        "phoneNumber": phoneNumber == null
+            ? []
+            : List<String>.from(phoneNumber!.map((x) => x)),
+        "telegram":
+            telegram == null ? [] : List<String>.from(telegram!.map((x) => x)),
+        "whatsApp":
+            whatsApp == null ? [] : List<String>.from(whatsApp!.map((x) => x)),
+        "weChat":
+            weChat == null ? [] : List<String>.from(weChat!.map((x) => x)),
+        "garageSocialLinks": garageSocialLinks == null
+            ? []
+            : List<String>.from(garageSocialLinks!.map((x) => x.toJson())),
+      };
+}
+
+enum GarageSocialLinkType {
+  none,
+  youTube,
+  facebook,
+  instagram,
+  twitter,
+  tamneak,
+  threads,
+  tikTok,
+}
+
+class GarageSocialLinkView {
+  final String socialLink;
+  final String baseUrl;
+  final String username;
+  final int socialLinkType;
+  final String socialName;
+
+  GarageSocialLinkView({
+    required this.socialLink,
+    required this.baseUrl,
+    required this.username,
+    required this.socialLinkType,
+    required this.socialName,
+  });
+
+  factory GarageSocialLinkView.fromJson(Map<String, dynamic> json) =>
+      GarageSocialLinkView(
+        socialLink: json["socialLink"],
+        baseUrl: json["baseUrl"],
+        username: json["username"],
+        socialLinkType: json["socialLinkType"],
+        socialName: json["socialName"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "socialLink": socialLink,
+        "baseUrl": baseUrl,
+        "username": username,
+        "socialLinkType": socialLinkType,
+        "socialName": socialName,
+      };
+}
+
+class GarageSocialLinks {
+  static List<GarageSocialLinkView> get list => _list;
+
+  static GarageSocialLinkView? findByType(int type) {
+    return _list.firstWhere(
+      (country) => country.socialLinkType == type,
+      orElse: () {
+        throw Exception('Invalid dial code: $type');
+      },
+    );
+  }
+
+  static final List<GarageSocialLinkView> _list = [
+    GarageSocialLinkView(
+      baseUrl: "https://www.youtube.com",
+      socialLink: "https://www.youtube.com/@codingtraining0102",
+      socialLinkType: 1,
+      username: "@codingtraining0102",
+      socialName: "YouTube",
+    ),
+    GarageSocialLinkView(
+      baseUrl: "https://www.facebook.com",
+      socialLink: "https://www.facebook.com/nith.nos.7",
+      socialLinkType: 2,
+      username: "nith.nos.7",
+      socialName: "Facebook",
+    ),
+    GarageSocialLinkView(
+      baseUrl: "https://www.instagram.com",
+      socialLink: "https://www.instagram.com/nith_z_290291",
+      socialLinkType: 3,
+      username: "nith_z_290291",
+      socialName: "Instagram",
+    ),
+    GarageSocialLinkView(
+      baseUrl: "https://twitter.com/CodingTrai36213",
+      socialLink: "https://twitter.com/CodingTrai36213",
+      socialLinkType: 4,
+      username: "CodingTrai36213",
+      socialName: "Twitter",
+    ),
+    GarageSocialLinkView(
+      baseUrl: "https://www.tiktok.com",
+      socialLink: "https://www.tiktok.com/@unknown_facts_29",
+      socialLinkType: 7,
+      username: "@unknown_facts_29",
+      socialName: "TikTok",
+    ),
+  ];
 }

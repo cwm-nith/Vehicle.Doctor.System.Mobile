@@ -9,4 +9,9 @@ class GarageService extends GetxService {
     var garages = await GarageAPI.getGaragesByUser(rq);
     return garages;
   }
+
+  Future<GaragePageResponse> createGarageAsync(CreateGarage rq) async {
+    var garages = await GarageAPI.createGarageAsync(rq);
+    return garages;
+  }
 }

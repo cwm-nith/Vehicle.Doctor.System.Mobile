@@ -9,7 +9,10 @@ class CreateGarageState {
   Rx<LatLng> currentUserLocation = const LatLng(11.5583, 104.9121).obs;
 
   var countryCodes = Countries.list;
+  var socialTypes = GarageSocialLinks.list;
   Rx<Country?> countryCodeSelected = Countries.findByDialCode("+855").obs;
+  Rx<GarageSocialLinkView?> socialTypeSelected =
+      GarageSocialLinks.findByType(1).obs;
 
   RxList<String> listPhoneNumbers = RxList<String>();
   RxList<String> listTelegrams = RxList<String>();

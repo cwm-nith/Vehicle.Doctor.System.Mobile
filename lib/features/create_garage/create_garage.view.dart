@@ -110,7 +110,7 @@ class CreateGaragePage extends GetView<CreateGarageController> {
             ...[
               isPhoneNumber
                   ? Obx(
-                      () => PhoneCodeDropDown<Country>(
+                      () => DropDown<Country>(
                         items: controller.state.countryCodes
                             .map(
                               (item) => DropdownMenuItem(
@@ -253,7 +253,7 @@ class CreateGaragePage extends GetView<CreateGarageController> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.8,
+                    width: MediaQuery.of(context).size.width * 0.5,
                     child: Center(
                       child: Text(
                         "Garage Location",
@@ -262,6 +262,20 @@ class CreateGaragePage extends GetView<CreateGarageController> {
                           fontWeight: FontWeight.w600,
                           color: AppColors.secondaryElement,
                         ),
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () async {
+                      var curLocation = await controller.getCurrentLocation();
+                      controller.updateCurrentLocation(curLocation);
+                    },
+                    child: Text(
+                      "Current Location",
+                      style: TextStyle(
+                        fontSize: 13.sp,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.secondaryElement,
                       ),
                     ),
                   ),
@@ -519,6 +533,78 @@ class CreateGaragePage extends GetView<CreateGarageController> {
     );
   }
 
+  Widget _buildSocialLinkSection(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        vertical: 20.0.h,
+        horizontal: 20.w,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Text(
+              "Garage Links",
+              style: TextStyle(
+                color: AppColors.primaryText,
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 40.h),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 30.h),
+                  child: Obx(
+                    () => DropDown<GarageSocialLinkView>(
+                      btnWidth: 100,
+                      btnDwWidth: 120,
+                      items: controller.state.socialTypes
+                          .map(
+                            (item) => DropdownMenuItem(
+                              value: item,
+                              child: Text(
+                                item.socialName,
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  color: AppColors.primaryText,
+                                ),
+                              ),
+                            ),
+                          )
+                          .toList(),
+                      selectedItems: controller.state.socialTypeSelected.value,
+                      onChanged: (val) {
+                        controller.state.socialTypeSelected.value = val;
+                      },
+                      searchMatchFn: (item, searchVal) {
+                        return (item.value?.socialName
+                                .toLowerCase()
+                                .contains(searchVal.toLowerCase()) ??
+                            false);
+                      },
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: _inputField(
+                    textEditingController: controller.ctPhTextController,
+                    text: "Username",
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   List<Widget> _buildSteps(BuildContext context) {
     return [
       _buildGarageProfileSection(),
@@ -527,7 +613,7 @@ class CreateGaragePage extends GetView<CreateGarageController> {
         child: _buildMapSection(context),
       ),
       _buildContactSection(context),
-      Container(),
+      _buildSocialLinkSection(context),
     ];
   }
 
@@ -586,7 +672,9 @@ class CreateGaragePage extends GetView<CreateGarageController> {
                                 width: 60.w,
                                 height: 40.h,
                                 title: "Save",
-                                onPressed: () {},
+                                onPressed: () async {
+                                  await controller.createGarageAsync();
+                                },
                               )
                             : btnFlatButtonWidget(
                                 width: 60.w,

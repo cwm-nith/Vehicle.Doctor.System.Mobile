@@ -5,14 +5,19 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vehicle_doctor_mobile/common/values/colors.dart';
 
-class PhoneCodeDropDown<TItem> extends StatelessWidget {
-  PhoneCodeDropDown({
+class DropDown<TItem> extends StatelessWidget {
+  DropDown({
     super.key,
     required this.items,
     required this.selectedItems,
     required this.onChanged,
     required this.searchMatchFn,
+    this.btnDwWidth,
+    this.btnWidth,
   });
+
+  final double? btnWidth;
+  final double? btnDwWidth;
 
   final List<DropdownMenuItem<TItem>> items;
   TItem? selectedItems;
@@ -36,13 +41,13 @@ class PhoneCodeDropDown<TItem> extends StatelessWidget {
         items: items,
         value: selectedItems,
         onChanged: onChanged,
-        buttonStyleData: const ButtonStyleData(
+        buttonStyleData: ButtonStyleData(
           height: 40,
-          width: 70,
+          width: btnWidth ?? 70,
         ),
         dropdownStyleData: DropdownStyleData(
           maxHeight: 400,
-          width: 100,
+          width: btnDwWidth ?? 100,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(14),
             color: AppColors.primaryBackground,

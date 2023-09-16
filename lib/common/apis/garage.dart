@@ -9,4 +9,12 @@ class GarageAPI {
     );
     return GaragePageResponse.fromJson(response);
   }
+
+  static Future<GaragePageResponse> createGarageAsync(CreateGarage rq) async {
+    var response = await HttpUtil().post(
+      'api/v1/garage',
+      data: rq.toJson(),
+    );
+    return GaragePageResponse.fromJson(response);
+  }
 }

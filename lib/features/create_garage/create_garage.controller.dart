@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:vehicle_doctor_mobile/common/entities/entities.dart';
+import 'package:vehicle_doctor_mobile/common/services/services.dart';
 import 'package:vehicle_doctor_mobile/common/utils/print.dart';
 import 'package:vehicle_doctor_mobile/common/utils/utils.dart';
 import 'package:vehicle_doctor_mobile/features/create_garage/index.dart';
@@ -131,5 +134,32 @@ class CreateGarageController extends GetxController {
       state.listWeChats.add(ctWcTextController.text);
       ctWcTextController.clear();
     }
+  }
+
+  Future createGarageAsync() async {
+    EasyLoading.show(status: 'creating garage...', dismissOnTap: false);
+
+    var addr = addressTextController.text;
+    var name = nameTextController.text;
+    var des = descriptionTextController.text;
+    var lat = state.currentUserLocation.value.latitude;
+    var long = state.currentUserLocation.value.longitude;
+    // var socailType = state.socialTypeSelected.value?.socialLinkType;
+    // var socialLink = state.socialTypeSelected.value?.socialLink;
+    var body = CreateGarage(
+      address: addr,
+      description: des,
+      garageSocialLinks: List.empty(),
+      lat: lat,
+      long: long,
+      name: name,
+      phoneNumber: state.listPhoneNumbers,
+      telegram: state.listTelegrams,
+      weChat: state.listWeChats,
+      whatsApp: state.listWhatsApps,
+    );
+    await GarageService.to.createGarageAsync(body);
+    EasyLoading.dismiss();
+    Get.back();
   }
 }
