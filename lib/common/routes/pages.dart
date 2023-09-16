@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vehicle_doctor_mobile/features/account/index.dart';
 import 'package:vehicle_doctor_mobile/features/create_garage/index.dart';
+import 'package:vehicle_doctor_mobile/features/garage/index.dart';
 import 'package:vehicle_doctor_mobile/features/garage_main_page/index.dart';
-import 'package:vehicle_doctor_mobile/features/location_search/index.dart';
 import 'package:vehicle_doctor_mobile/features/welcome/index.dart';
 import 'package:vehicle_doctor_mobile/features/change_password/index.dart';
 import 'package:vehicle_doctor_mobile/features/landing/index.dart';
@@ -64,10 +64,16 @@ class AppPages {
       binding: CreateGarageBinding(),
     ),
     GetPage(
-      name: AppRoutes.searchLocation,
-      page: () => const SearchLocationPage(),
-      binding: LocationSearchBinding(),
+      name: AppRoutes.garagePage,
+      page: () => const GaragePage(),
+      binding: GarageBinding(),
     )
+
+    // GetPage(
+    //   name: AppRoutes.searchLocation,
+    //   page: () => const SearchLocationPage(),
+    //   binding: LocationSearchBinding(),
+    // )
     /*
     // GetPage(
     //   name: AppRoutes.Application,

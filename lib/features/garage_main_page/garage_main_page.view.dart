@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:vehicle_doctor_mobile/common/entities/entities.dart';
+import 'package:vehicle_doctor_mobile/common/routes/routes.dart';
 import 'package:vehicle_doctor_mobile/common/values/colors.dart';
 import 'package:vehicle_doctor_mobile/common/widgets/widgets.dart';
 import 'package:vehicle_doctor_mobile/features/garage_main_page/index.dart';
@@ -66,27 +67,46 @@ class GarageMainPage extends GetView<GarageMainController> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(
-            width: 50.w,
-            height: 50.h,
-            child: CircleAvatar(
-              backgroundImage: const AssetImage(
-                'assets/images/profile-man.jpg',
-              ),
-              foregroundImage: const AssetImage(
-                'assets/images/profile-man.jpg',
-              ),
-              backgroundColor: AppColors.primaryElement.withOpacity(0.7),
-            ),
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.65,
-            child: Text(
-              garage?.name ?? "Garages",
-              style: TextStyle(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.w500,
-                color: AppColors.primaryText.withOpacity(0.8),
+          GestureDetector(
+            onTap: () {
+              Get.toNamed(
+                AppRoutes.garagePage,
+                arguments: {
+                  "id": garage?.id,
+                },
+              );
+            },
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.7,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 50.w,
+                    height: 50.h,
+                    child: CircleAvatar(
+                      backgroundImage: const AssetImage(
+                        'assets/images/profile-man.jpg',
+                      ),
+                      foregroundImage: const AssetImage(
+                        'assets/images/profile-man.jpg',
+                      ),
+                      backgroundColor:
+                          AppColors.primaryElement.withOpacity(0.7),
+                    ),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    child: Text(
+                      garage?.name ?? "Garages",
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.primaryText.withOpacity(0.8),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

@@ -58,6 +58,11 @@ class Garage {
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final int? updatedBy;
+  final List<String>? phoneNumber;
+  final List<String>? telegram;
+  final List<String>? whatsApp;
+  final List<String>? weChat;
+  final List<GarageSocialLink>? garageSocialLinks;
 
   Garage({
     this.id,
@@ -72,14 +77,19 @@ class Garage {
     this.createdAt,
     this.updatedAt,
     this.updatedBy,
+    this.phoneNumber,
+    this.telegram,
+    this.whatsApp,
+    this.weChat,
+    this.garageSocialLinks,
   });
 
   factory Garage.fromJson(Map<String, dynamic> json) => Garage(
         id: json["id"],
         name: json["name"],
         address: json["address"],
-        lat: json["lat"]?.toDouble(),
-        long: json["long"]?.toDouble(),
+        lat: json["lat"],
+        long: json["long"],
         description: json["description"],
         userId: json["userId"],
         deletedAt: json["deletedAt"] == null
@@ -93,6 +103,22 @@ class Garage {
             ? null
             : DateTime.parse(json["updatedAt"]),
         updatedBy: json["updatedBy"],
+        phoneNumber: json["phoneNumber"] == null
+            ? []
+            : List<String>.from(json["phoneNumber"]!.map((x) => x)),
+        telegram: json["telegram"] == null
+            ? []
+            : List<String>.from(json["telegram"]!.map((x) => x)),
+        whatsApp: json["whatsApp"] == null
+            ? []
+            : List<String>.from(json["whatsApp"]!.map((x) => x)),
+        weChat: json["weChat"] == null
+            ? []
+            : List<String>.from(json["weChat"]!.map((x) => x)),
+        garageSocialLinks: json["garageSocialLinks"] == null
+            ? []
+            : List<GarageSocialLink>.from(json["garageSocialLinks"]!
+                .map((x) => GarageSocialLink.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -108,6 +134,18 @@ class Garage {
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
         "updatedBy": updatedBy,
+        "phoneNumber": phoneNumber == null
+            ? []
+            : List<dynamic>.from(phoneNumber!.map((x) => x)),
+        "telegram":
+            telegram == null ? [] : List<dynamic>.from(telegram!.map((x) => x)),
+        "whatsApp":
+            whatsApp == null ? [] : List<dynamic>.from(whatsApp!.map((x) => x)),
+        "weChat":
+            weChat == null ? [] : List<dynamic>.from(weChat!.map((x) => x)),
+        "garageSocialLinks": garageSocialLinks == null
+            ? []
+            : List<dynamic>.from(garageSocialLinks!.map((x) => x.toJson())),
       };
 }
 

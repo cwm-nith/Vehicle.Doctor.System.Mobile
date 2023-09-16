@@ -10,6 +10,13 @@ class GarageAPI {
     return GaragePageResponse.fromJson(response);
   }
 
+  static Future<Garage> getGaragesById(int id) async {
+    var response = await HttpUtil().get(
+      'api/v1/garage/$id',
+    );
+    return Garage.fromJson(response);
+  }
+
   static Future<GaragePageResponse> createGarageAsync(CreateGarage rq) async {
     var response = await HttpUtil().post(
       'api/v1/garage',
