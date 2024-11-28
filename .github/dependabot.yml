@@ -10,19 +10,3 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    ignore:
-      # Ignore major updates for certain packages (optional)
-      - dependency-name: "flutter"
-        update-types:
-          - "version-update:semver-major"
-
-  # GitHub Actions dependencies
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-    ignore:
-      # Ignore all pre-releases
-      - dependency-name: "*"
-        update-types:
-          - "version-update:semver-pre"
