@@ -15,14 +15,14 @@ updates:
       - dependency-name: "flutter"
         update-types:
           - "version-update:semver-major"
-  # GitHub Actions (if you use them)
+
+  # GitHub Actions dependencies
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
     ignore:
-      # Ignore pre-releases (optional)
+      # Ignore all pre-releases
       - dependency-name: "*"
-        versions:
-          - "*-beta.*"
-
+        update-types:
+          - "version-update:semver-pre"
