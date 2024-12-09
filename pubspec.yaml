@@ -36,7 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   #GetX
-  get: ^4.6.5
+  get: ^4.6.6
 
   # date
   intl: ^0.18.1
