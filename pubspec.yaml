@@ -79,7 +79,7 @@ dependencies:
   share_plus: ^7.1.0
 
   # device info
-  device_info_plus: ^9.0.3
+  device_info_plus: ^11.2.0
 
   # package info
   package_info_plus: ^4.1.0
