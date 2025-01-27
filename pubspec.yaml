@@ -57,7 +57,7 @@ dependencies:
 
   # local storage
   shared_preferences: ^2.3.3
-  cached_network_image: ^3.2.3
+  cached_network_image: ^3.4.1
   flutter_cache_manager: ^3.3.1
 
   image_picker: ^1.0.2
