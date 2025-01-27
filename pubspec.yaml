@@ -89,7 +89,7 @@ dependencies:
   firebase_messaging: ^15.2.0
   firebase_in_app_messaging: ^0.8.1
 
-  crypto: ^3.0.3
+  crypto: ^3.0.6
 
   dropdown_button2: ^2.3.8
 
