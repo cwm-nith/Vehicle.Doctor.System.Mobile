@@ -39,7 +39,7 @@ dependencies:
   get: ^4.6.6
 
   # date
-  intl: ^0.18.1
+  intl: ^0.20.2
 
   # device ui resizing
   flutter_screenutil: ^5.9.3
