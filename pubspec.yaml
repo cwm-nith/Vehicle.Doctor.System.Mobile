@@ -56,7 +56,7 @@ dependencies:
   cookie_jar: ^4.0.8
 
   # local storage
-  shared_preferences: ^2.5.1
+  shared_preferences: ^2.5.2
   cached_network_image: ^3.4.1
   flutter_cache_manager: ^3.3.1
 
