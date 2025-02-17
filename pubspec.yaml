@@ -86,7 +86,7 @@ dependencies:
 
   dots_indicator: ^3.0.0
 
-  firebase_messaging: ^15.2.1
+  firebase_messaging: ^15.2.2
   firebase_in_app_messaging: ^0.8.1
 
   crypto: ^3.0.6
