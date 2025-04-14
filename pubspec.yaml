@@ -69,7 +69,7 @@ dependencies:
 
   location: ^8.0.0
 
-  permission_handler: ^11.4.0
+  permission_handler: ^12.0.0+1
   path_provider: ^2.0.15
 
   # loading
