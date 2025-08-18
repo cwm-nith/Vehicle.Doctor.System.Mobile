@@ -51,8 +51,8 @@ dependencies:
   flutter_easyloading: ^3.0.5
 
   # http
-  dio: ^5.8.0+1
   dio_cookie_manager: ^3.3.0
+  dio: ^5.9.0
   cookie_jar: ^4.0.8
 
   # local storage
@@ -65,7 +65,7 @@ dependencies:
 
   photo_view: ^0.15.0
 
-  flutter_local_notifications: ^19.3.1
+  flutter_local_notifications: ^19.4.0
 
   location: ^8.0.1
 
@@ -86,7 +86,7 @@ dependencies:
 
   dots_indicator: ^4.0.1
 
-  firebase_messaging: ^15.2.9
+  firebase_messaging: ^15.2.10
   firebase_in_app_messaging: ^0.8.1
 
   crypto: ^3.0.6
