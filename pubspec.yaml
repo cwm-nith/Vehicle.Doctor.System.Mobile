@@ -76,7 +76,7 @@ dependencies:
   loading_animations: ^2.2.0
 
   # share
-  share_plus: ^12.0.0
+  share_plus: ^12.0.1
 
   # device info
   device_info_plus: ^12.2.0
