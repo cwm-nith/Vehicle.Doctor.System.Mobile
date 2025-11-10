@@ -93,7 +93,7 @@ dependencies:
 
   dropdown_button2: ^2.3.9
 
-  google_maps_flutter: ^2.13.1
+  google_maps_flutter: ^2.14.0
   geocode: ^1.0.3
   geolocator: ^14.0.2
 
