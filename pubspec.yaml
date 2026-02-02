@@ -52,7 +52,7 @@ dependencies:
 
   # http
   dio_cookie_manager: ^3.3.0
-  dio: ^5.9.0
+  dio: ^5.9.1
   cookie_jar: ^4.0.8
 
   # local storage
