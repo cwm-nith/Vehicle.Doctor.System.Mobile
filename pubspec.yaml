@@ -91,7 +91,7 @@ dependencies:
 
   crypto: ^3.0.7
 
-  dropdown_button2: ^2.3.9
+  dropdown_button2: ^3.0.0
 
   google_maps_flutter: ^2.14.2
   geocode: ^1.0.3
