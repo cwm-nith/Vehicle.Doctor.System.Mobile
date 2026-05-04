@@ -5,10 +5,10 @@ packages:
     dependency: transitive
     description:
       name: _flutterfire_internals
-      sha256: f698de6eb8a0dd7a9a931bbfe13568e8b77e702eb2deb13dd83480c5373e7746
+      sha256: bda3b7b55958bfd867addc40d067b4b11f7b8846d57671f5b5a6e7f9a56fe3ad
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.68"
+    version: "1.3.69"
   args:
     dependency: transitive
     description:
@@ -245,10 +245,10 @@ packages:
     dependency: transitive
     description:
       name: firebase_core
-      sha256: "2f988dab915efde3b3105268dbd69efce0e8570d767a218ccd914afd0c10c8cc"
+      sha256: d5a94b884dcb1e6d3430298e94bfe002238094cdfd5e29202d536ee2120f9158
       url: "https://pub.dev"
     source: hosted
-    version: "4.6.0"
+    version: "4.7.0"
   firebase_core_platform_interface:
     dependency: transitive
     description:
@@ -261,26 +261,26 @@ packages:
     dependency: transitive
     description:
       name: firebase_core_web
-      sha256: "1399ab1f0ac3b503d8a9be64a4c997fc066bbf33f701f42866e5569f26205ebe"
+      sha256: dc5096257cd67292d34d78ceeb90836f02a4be921b5f3934311a02bb2376118c
       url: "https://pub.dev"
     source: hosted
-    version: "3.5.1"
+    version: "3.6.0"
   firebase_in_app_messaging:
     dependency: "direct main"
     description:
       name: firebase_in_app_messaging
-      sha256: "710992f41a2c4069c35b55c00e2278912c65f5280c8bebade145cbfe88e40616"
+      sha256: ccc5e2f854e6674218cddbd26339a369bbd41cfe0f621d1123c6ac5c6e63daa2
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.1"
+    version: "0.9.2"
   firebase_in_app_messaging_platform_interface:
     dependency: transitive
     description:
       name: firebase_in_app_messaging_platform_interface
-      sha256: "2014bf9433ca5e8092403213d74fe35ed33547bff6f016c5aab0922a35fa1a90"
+      sha256: "91729305c75b95d58990bee246876d107a96f93007fd8fa2bab63bb1f79fe19a"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.5+19"
+    version: "0.2.5+20"
   firebase_messaging:
     dependency: "direct main"
     description:
