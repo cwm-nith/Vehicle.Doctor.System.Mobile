@@ -76,13 +76,13 @@ dependencies:
   loading_animations: ^2.2.0
 
   # share
-  share_plus: ^12.0.2
+  share_plus: ^13.3.0
 
   # device info
-  device_info_plus: ^12.4.0
+  device_info_plus: ^13.2.0
 
   # package info
-  package_info_plus: ^9.0.1
+  package_info_plus: ^10.2.1
 
   dots_indicator: ^4.0.1
 
