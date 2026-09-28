@@ -70,7 +70,7 @@ dependencies:
   location: ^8.0.1
 
   permission_handler: ^13.0.1
-  path_provider: ^2.0.15
+  path_provider: ^2.1.6
 
   # loading
   loading_animations: ^2.2.0
