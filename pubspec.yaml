@@ -65,7 +65,7 @@ dependencies:
 
   photo_view: ^0.15.0
 
-  flutter_local_notifications: ^21.0.0
+  flutter_local_notifications: ^22.3.1
 
   location: ^8.0.1
 
