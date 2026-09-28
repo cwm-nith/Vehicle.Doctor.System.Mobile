@@ -67,7 +67,7 @@ dependencies:
 
   flutter_local_notifications: ^21.0.0
 
-  location: ^8.0.1
+  location: ^10.0.2
 
   permission_handler: ^13.0.1
   path_provider: ^2.0.15
