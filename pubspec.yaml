@@ -84,7 +84,7 @@ dependencies:
   # package info
   package_info_plus: ^10.2.1
 
-  dots_indicator: ^4.0.1
+  dots_indicator: ^5.0.0
 
   firebase_messaging: ^16.2.2
   firebase_in_app_messaging: ^0.9.2
