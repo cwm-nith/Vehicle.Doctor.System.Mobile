@@ -95,7 +95,7 @@ dependencies:
 
   google_maps_flutter: ^2.18.0
   geocode: ^1.0.3
-  geolocator: ^14.0.2
+  geolocator: ^14.1.1
 
 dev_dependencies:
   flutter_test:
